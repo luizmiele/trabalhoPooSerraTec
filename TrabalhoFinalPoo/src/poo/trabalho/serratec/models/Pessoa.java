@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Pessoa {
+	private int pessoaID;
 	private String nome;
 	private String cpf;
 	private LocalDate dataNascimento;

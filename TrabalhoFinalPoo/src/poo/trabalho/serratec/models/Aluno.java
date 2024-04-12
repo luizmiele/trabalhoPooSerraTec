@@ -18,12 +18,29 @@ public class Aluno extends Pessoa{
 	}
 	
 	
+	
+	public String getPlanoContratado() {
+		return planoContratado;
+	}
+
+	public LocalDate getDataMatricula() {
+		return dataMatricula;
+	}
+
+	public List<String> getAvaliacoesFisicas() {
+		return avaliacoesFisicas;
+	}
+
+	public double getImc() {
+		return imc;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return super.toString()+ "PlanoContratado: " + planoContratado + "\nDataMatricula: " + dataMatricula + "\nAvaliacoesFisicas: "
 				+ avaliacoesFisicas + "\nImc: " + imc;
 	}
-	
-	
-	
 }
