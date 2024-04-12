@@ -11,6 +11,11 @@ public class Funcionario extends Pessoa {
 		super(nome, cpf, dataNascimento, telefone, email, senha);
 		this.cargo = cargo;
 	}
+	
+	public String getCargo() {
+		return cargo;
+	}
+
 
 	@Override
 	public String toString() {

@@ -3,19 +3,25 @@ package poo.trabalho.serratec.main;
 
 import java.time.LocalDate;
 
-import poo.trabalho.serratec.DAO.AlunoDAO;
-import poo.trabalho.serratec.models.Aluno;
+import poo.trabalho.serratec.DAO.FuncionarioDAO;
+import poo.trabalho.serratec.models.Funcionario;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		Aluno alunoPURAO = new Aluno("GUGU", "12345678910", LocalDate.of(1999, 1, 1), "22222-2222", "Gugu@BV.com.br", "123456", "PINK", LocalDate.of(2024, 1,1) );
+		//Aluno alunoPURAO = new Aluno("Lucas Amorin2", "12345678900", LocalDate.of(2007, 2, 11), "11111-1111", "lucas@amorin.com.br", "456", "PINK", LocalDate.of(2024, 4,12) );
 		
 		
-		AlunoDAO aluno = new AlunoDAO();
+		//AlunoDAO aluno = new AlunoDAO();
 		
-		aluno.cadastra(alunoPURAO); //FAZ O L.
+		//aluno.cadastra(alunoPURAO);
 		
+		
+		Funcionario funcionarioPURAO = new Funcionario("Boeck", "12332112332", LocalDate.of(2000, 4, 17), "11111-1111", "Boeck@Academia.com", "1234", "Gerente mar brabo");
+		
+		FuncionarioDAO funcionario = new FuncionarioDAO();
+		
+		funcionario.cadastra(funcionarioPURAO);
 	}
 }
