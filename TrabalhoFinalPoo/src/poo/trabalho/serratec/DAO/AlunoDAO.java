@@ -12,7 +12,7 @@ public class AlunoDAO {
 	
 	public void cadastra(Aluno aluno) {
 
-		String sqlPessoa = "INSERT INTO PESSOA (NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL, SENHA) VALUES (?, ?, ?, ?, ?, ?)";
+		String sqlPessoa = "INSERT INTO PESSOA (NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL, SENHA) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlPessoa);
@@ -22,6 +22,7 @@ public class AlunoDAO {
 			ps.setString(4, aluno.getEmail());
 			ps.setString(5, aluno.getTelefone());
 			ps.setString(6, aluno.getSenha());
+			ps.setString(7, "Aluno");
 			ps.executeUpdate(); //executeUpdate é pra insert
 								//executequery  é pra read
 			
@@ -65,5 +66,51 @@ public class AlunoDAO {
 			e.printStackTrace();
 		}
 		return planoID;
+	}
+	
+public static String getAlunoId() {
+		
+		String sqlGetHorario = "SELECT alunoID FROM pessoa join aluno WHERE pessoa.cpf = ? ";
+		ResultSet rs;
+		int planoID = 0;
+		
+		try {
+			ps = ConexaoBD.getConexao().prepareStatement(sqlGetHorario);
+			ps.setString(1, Aluno.getId());
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				planoID = rs.getInt("planoID");
+			} else {
+				System.out.println("Aluno não encontrado!");
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return horarioAgendamento;
+	}
+	
+public static String getHorarioAtendimentoPorAluno() {
+		
+		String sqlGetHorario = "SELECT * FROM agendamento WHERE alunoID = ? ";
+		ResultSet rs;
+		int planoID = 0;
+		
+		try {
+			ps = ConexaoBD.getConexao().prepareStatement(sqlGetHorario);
+			ps.setString(1, Aluno.getId());
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				planoID = rs.getInt("planoID");
+			} else {
+				System.out.println("Aluno não encontrado!");
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return horarioAgendamento;
 	}
 }

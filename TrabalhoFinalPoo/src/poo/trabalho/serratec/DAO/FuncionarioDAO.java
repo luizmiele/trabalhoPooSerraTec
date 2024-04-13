@@ -12,7 +12,7 @@ public class FuncionarioDAO {
 	
 	public void cadastra(Funcionario funcionario) {
 		
-		String sqlPessoa = "INSERT INTO PESSOA (NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL, SENHA) VALUES (?, ?, ?, ?, ?, ?)";
+		String sqlPessoa = "INSERT INTO PESSOA (NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL, SENHA) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlPessoa);
@@ -22,6 +22,7 @@ public class FuncionarioDAO {
 			ps.setString(4, funcionario.getEmail());
 			ps.setString(5, funcionario.getTelefone());
 			ps.setString(6, funcionario.getSenha());
+			ps.setString(7, "Funcionario");
 			ps.executeUpdate(); //executeUpdate é pra insert
 								//executequery  é pra read
 			

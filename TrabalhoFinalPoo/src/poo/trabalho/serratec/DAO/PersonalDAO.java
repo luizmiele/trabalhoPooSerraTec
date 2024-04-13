@@ -11,7 +11,7 @@ static PreparedStatement ps = null;
 	
 	public void cadastra(Personal personal) {
 		
-		String sqlPessoa = "INSERT INTO PESSOA (NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL, SENHA) VALUES (?, ?, ?, ?, ?, ?)";
+		String sqlPessoa = "INSERT INTO PESSOA (NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL, SENHA) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlPessoa);
@@ -21,6 +21,7 @@ static PreparedStatement ps = null;
 			ps.setString(4, personal.getEmail());
 			ps.setString(5, personal.getTelefone());
 			ps.setString(6, personal.getSenha());
+			ps.setString(7, "Personal");
 			ps.executeUpdate(); //executeUpdate é pra insert
 								//executequery  é pra read
 			ps.close();
@@ -28,7 +29,7 @@ static PreparedStatement ps = null;
 			e.printStackTrace();
 		}
 		
-		String sqlpersonal = "INSERT INTO personal (personalID,) values (currvrval('pessoa_pessoaID_seq'), ?)";
+		String sqlpersonal = "INSERT INTO personal (personalID,) values (currval('pessoa_pessoaID_seq'), ?)";
 		
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlpersonal);

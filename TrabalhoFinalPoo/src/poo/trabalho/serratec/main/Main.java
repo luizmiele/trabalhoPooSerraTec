@@ -18,10 +18,10 @@ public class Main {
 		//aluno.cadastra(alunoPURAO);
 		
 		
-		Funcionario funcionarioPURAO = new Funcionario("Boeck", "12332112332", LocalDate.of(2000, 4, 17), "11111-1111", "Boeck@Academia.com", "1234", "Gerente mar brabo");
+		Funcionario funcionarioOBJ = new Funcionario("Boeck", "12332112332", LocalDate.of(2000, 4, 17), "11111-1111", "Boeck@Academia.com", "1234", "Gerente mar brabo");
 		
 		FuncionarioDAO funcionario = new FuncionarioDAO();
 		
-		funcionario.cadastra(funcionarioPURAO);
+		funcionario.cadastra(funcionarioOBJ);
 	}
 }

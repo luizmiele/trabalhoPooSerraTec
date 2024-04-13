@@ -1,22 +1,23 @@
 package poo.trabalho.serratec.DAO;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import poo.trabalho.serratec.conexao.ConexaoBD;
 
 public class AgendamentoDAO {
+	static PreparedStatement ps = null;
 	
-	
-	public static Agendamento getHorarioAtendimento() {
+	public static String getHorarioAtendimentoPorAluno() {
 		
-		String sqlGetHorario = "SELECT * FROM agendamento WHERE agendamento = ? ";
+		String sqlGetHorario = "SELECT * FROM agendamento WHERE alunoID = ? ";
 		ResultSet rs;
 		int planoID = 0;
 		
 		try {
-			ps = ConexaoBD.getConexao().prepareStatement(sqlGetPlanoID);
-			ps.setString(1, aluno.getPlanoContratado());
+			ps = ConexaoBD.getConexao().prepareStatement(sqlGetHorario);
+			ps.setString(1, aluno.getAlunoID());
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
@@ -30,6 +31,5 @@ public class AgendamentoDAO {
 		}
 		return horarioAgendamento;
 	}
-		return "aaa";
-	}
+	
 }
