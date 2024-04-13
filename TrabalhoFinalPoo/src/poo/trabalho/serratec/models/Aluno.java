@@ -7,18 +7,23 @@ public class Aluno extends Pessoa{
 	private String planoContratado;
 	private LocalDate dataMatricula;
 	private List<String> avaliacoesFisicas;
-	private double imc;
 	
 	
-	public Aluno(String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha,
+	public Aluno(String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha, String tipo,
 			String planoContratado, LocalDate dataMatricula) {
-		super(nome, cpf, dataNascimento, telefone, email, senha);
+		super(nome, cpf, dataNascimento, telefone, email, senha, tipo);
 		this.planoContratado = planoContratado;
 		this.dataMatricula = dataMatricula;
 	}
 	
 	
 	
+	public Aluno(String cpfInserido, String senhaInserido) {
+		
+	}
+
+
+
 	public String getPlanoContratado() {
 		return planoContratado;
 	}
@@ -31,16 +36,10 @@ public class Aluno extends Pessoa{
 		return avaliacoesFisicas;
 	}
 
-	public double getImc() {
-		return imc;
-	}
-
-
-
 
 	@Override
 	public String toString() {
 		return super.toString()+ "PlanoContratado: " + planoContratado + "\nDataMatricula: " + dataMatricula + "\nAvaliacoesFisicas: "
-				+ avaliacoesFisicas + "\nImc: " + imc;
+				+ avaliacoesFisicas;
 	}
 }

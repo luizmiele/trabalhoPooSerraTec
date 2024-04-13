@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import poo.trabalho.serratec.conexao.ConexaoBD;
 import poo.trabalho.serratec.models.Aluno;
+import poo.trabalho.serratec.models.Pessoa;
 
 public class AlunoDAO {
 	static PreparedStatement ps = null;
@@ -46,6 +47,26 @@ public class AlunoDAO {
 		}	
 	}
 	
+	public ResultSet autenticaLogin(Pessoa pessoa) {
+		//pegar as informaçoes do BD para poder usar na funcao ValidaLogin.java
+		PreparedStatement ps = null;
+		
+			String sqlNomeSenha = "SELECT * FROM PESSOA WHERE CPF = ? AND SENHA = ? ";
+		
+			try {
+				ps = ConexaoBD.getConexao().prepareStatement(sqlNomeSenha);
+				ps.setString(1, pessoa.getCpf());
+				ps.setString(2, pessoa.getSenha());
+				
+				ResultSet rs = ps.executeQuery();
+				return rs;
+				
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+	}
 	public int getPlanoID(Aluno aluno) {
 		String sqlGetPlanoID = "SELECT planoID FROM PLANO WHERE nomePlano = ?";
 		ResultSet rs;

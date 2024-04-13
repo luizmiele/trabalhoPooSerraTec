@@ -1,8 +1,6 @@
 package poo.trabalho.serratec.models;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Pessoa {
 	private int pessoaID;
@@ -12,15 +10,20 @@ public abstract class Pessoa {
 	private String telefone;
 	private String email;
 	private String senha;
+	private String tipo;
 	
+	public Pessoa() {
+		
+	}
 	
-	public Pessoa(String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha) {
+	public Pessoa(String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha, String tipo) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;
+		this.tipo = tipo;
 	}
 	
 	
@@ -49,10 +52,25 @@ public abstract class Pessoa {
 		return senha;
 	}
 
+	
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
 	@Override
 	public String toString() {
 		return "\nNome: " + nome + "\nCpf: " + cpf + "\nDataNascimento: " + dataNascimento + "\nTelefone: " + telefone + "\nEmail: " + email
 				+ "\nSenha: " + senha;
+	}
+
+
+
+	public String getTipo() {
+		return tipo;
 	}
 }

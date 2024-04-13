@@ -12,7 +12,7 @@ public class FuncionarioDAO {
 	
 	public void cadastra(Funcionario funcionario) {
 		
-		String sqlPessoa = "INSERT INTO PESSOA (NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL, SENHA) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sqlPessoa = "INSERT INTO PESSOA (NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL, SENHA, TIPO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlPessoa);

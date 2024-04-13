@@ -29,7 +29,6 @@ public class Agendamento {
 		return alunoID;
 	}
 	
-	
 	@Override
 	public String toString() {
 		return "Agendamento [data=" + data + ", horario=" + horario + ", personalID=" + personalID + ", alunoID="

@@ -1,33 +1,25 @@
 package poo.trabalho.serratec.DAO;
 
+import java.nio.file.attribute.AclEntry;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import poo.trabalho.serratec.conexao.ConexaoBD;
 import poo.trabalho.serratec.models.Aluno;
+import poo.trabalho.serratec.models.Pessoa;
 
 public class ValidaLoginDAO {
-	//pegar as informaçoes do BD para poder usar na funcao ValidaLogin.java
-	static PreparedStatement ps = null;
-	
-	insira um cpf:
-	cfpInserido = scanner.nextLine();
-	cpfDoBanco() = select senhha from Pessoa where cpf = cpfInserido
-	if(cpfInserido tem no Banco) {
-		senhaBanco = pessoa.getSenha();
-	}
-	insira a senha:
-	senhaInserida = scanner.nextLine();
-	
-	if (senhaInserida == senhaBanco) {
-		tipo = pessoa.getTipo();
-		abrir menu de acordo com o tipo.
-	}
 	
 	
-	public int getCpf(Aluno aluno) {
-		String sqlGetPlanoID = "SELECT  FROM PLANO WHERE nomePlano = ?";
+	
+	
+	
+	
+	
+	
+	public int getCpf() {
+		String sqlGetPlanoID = "SELECT FROM PLANO WHERE nomePlano = ?";
 		ResultSet rs;
 		int planoID = 0;
 		
@@ -69,6 +61,20 @@ public class ValidaLoginDAO {
 		}
 		return planoID;
 	}
-	
-	
 }
+
+	/*
+	  insira um cpf:
+		cfpInserido = scanner.nextLine();
+		cpfDoBanco() = select senhha from Pessoa where cpf = cpfInserido
+		if(cpfInserido tem no Banco) {
+			senhaBanco = pessoa.getSenha();
+		}
+		insira a senha:
+		senhaInserida = scanner.nextLine();
+		
+		if (senhaInserida == senhaBanco) {
+			tipo = pessoa.getTipo();
+			abrir menu de acordo com o tipo.
+		}
+	 */
