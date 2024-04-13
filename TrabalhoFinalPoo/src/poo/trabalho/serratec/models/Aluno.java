@@ -18,10 +18,9 @@ public class Aluno extends Pessoa{
 	
 	
 	
-	public Aluno(String cpfInserido, String senhaInserido) {
-		
+	public Aluno(String cpf, String senha) {
+		super(cpf, senha);
 	}
-
 
 
 	public String getPlanoContratado() {
@@ -39,7 +38,7 @@ public class Aluno extends Pessoa{
 
 	@Override
 	public String toString() {
-		return super.toString()+ "PlanoContratado: " + planoContratado + "\nDataMatricula: " + dataMatricula + "\nAvaliacoesFisicas: "
+		return super.toString()+ "\nPlanoContratado: " + planoContratado + "\nDataMatricula: " + dataMatricula + "\nAvaliacoesFisicas: "
 				+ avaliacoesFisicas;
 	}
 }

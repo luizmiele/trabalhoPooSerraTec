@@ -6,14 +6,13 @@ import java.sql.SQLException;
 
 import poo.trabalho.serratec.conexao.ConexaoBD;
 import poo.trabalho.serratec.models.Aluno;
-import poo.trabalho.serratec.models.Pessoa;
 
 public class AlunoDAO {
 	static PreparedStatement ps = null;
 	
 	public void cadastra(Aluno aluno) {
 
-		String sqlPessoa = "INSERT INTO PESSOA (NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL, SENHA) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sqlPessoa = "INSERT INTO PESSOA (NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL, SENHA, TIPO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlPessoa);
@@ -24,8 +23,8 @@ public class AlunoDAO {
 			ps.setString(5, aluno.getTelefone());
 			ps.setString(6, aluno.getSenha());
 			ps.setString(7, "Aluno");
-			ps.executeUpdate(); //executeUpdate é pra insert
-								//executequery  é pra read
+			ps.executeUpdate();
+								
 			
 			ps.close();
 		} catch (SQLException e) {
@@ -42,31 +41,51 @@ public class AlunoDAO {
 			
 			ps.close();
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 		}	
 	}
 	
-	public ResultSet autenticaLogin(Pessoa pessoa) {
-		//pegar as informaçoes do BD para poder usar na funcao ValidaLogin.java
+public static ResultSet getHorarioAtendimentoPorAluno(Aluno aluno) {
+		
+		String sqlGetHorario = "SELECT * FROM agendamento WHERE alunoID = ? ";
+		ResultSet rs;
+		ResultSet horarioAgendamento = null;
+		try {
+			ps = ConexaoBD.getConexao().prepareStatement(sqlGetHorario);
+			ps.setInt(1, aluno.getID());
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				horarioAgendamento = rs;
+			} else {
+				System.out.println("Aluno não encontrado!");
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return horarioAgendamento;
+}
+
+	public ResultSet autenticaLogin(Aluno aluno) {
 		PreparedStatement ps = null;
 		
 			String sqlNomeSenha = "SELECT * FROM PESSOA WHERE CPF = ? AND SENHA = ? ";
 		
 			try {
 				ps = ConexaoBD.getConexao().prepareStatement(sqlNomeSenha);
-				ps.setString(1, pessoa.getCpf());
-				ps.setString(2, pessoa.getSenha());
+				ps.setString(1, aluno.getCpf());
+				ps.setString(2, aluno.getSenha());
 				
 				ResultSet rs = ps.executeQuery();
 				return rs;
-				
-				
+						
 			}catch(SQLException e) {
 				e.printStackTrace();
 				return null;
 			}
 	}
+	
 	public int getPlanoID(Aluno aluno) {
 		String sqlGetPlanoID = "SELECT planoID FROM PLANO WHERE nomePlano = ?";
 		ResultSet rs;
@@ -81,57 +100,17 @@ public class AlunoDAO {
 				planoID = rs.getInt("planoID");
 			} else {
 				System.out.println("Aluno não encontrado!");
-			}
-			
+			}		
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return planoID;
 	}
 	
-public static String getAlunoId() {
-		
-		String sqlGetHorario = "SELECT alunoID FROM pessoa join aluno WHERE pessoa.cpf = ? ";
-		ResultSet rs;
-		int planoID = 0;
-		
-		try {
-			ps = ConexaoBD.getConexao().prepareStatement(sqlGetHorario);
-			ps.setString(1, Aluno.getId());
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				planoID = rs.getInt("planoID");
-			} else {
-				System.out.println("Aluno não encontrado!");
-			}
-			
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return horarioAgendamento;
-	}
+@Override
+public String toString() {
+	return super.toString();
+}
 	
-public static String getHorarioAtendimentoPorAluno() {
-		
-		String sqlGetHorario = "SELECT * FROM agendamento WHERE alunoID = ? ";
-		ResultSet rs;
-		int planoID = 0;
-		
-		try {
-			ps = ConexaoBD.getConexao().prepareStatement(sqlGetHorario);
-			ps.setString(1, Aluno.getId());
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				planoID = rs.getInt("planoID");
-			} else {
-				System.out.println("Aluno não encontrado!");
-			}
-			
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return horarioAgendamento;
-	}
+	
 }

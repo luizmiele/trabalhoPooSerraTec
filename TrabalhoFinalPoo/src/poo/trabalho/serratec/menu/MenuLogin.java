@@ -19,20 +19,18 @@ public class MenuLogin {
 		
 		Aluno alunoMDL = new Aluno(cpfInserido, senhaInserido);
 		
-		
 		AlunoDAO alunoDAO = new AlunoDAO();
 		ResultSet rsLogin = alunoDAO.autenticaLogin(alunoMDL);
 		
-		try {
-			if(rsLogin.next()) {
-				MenuAluno.exibeMenuAluno();
-			}else {
-				System.out.println(rsLogin);
-				System.out.println("CPF OU SENHA INVALIDO!");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			try {
+				if(rsLogin.next()) {
+					MenuAluno.exibeMenuAluno();
+				}else {
+					System.out.println("CPF OU SENHA INVALIDO!");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}		
 		sc.close();
 	}
 }

@@ -12,10 +12,11 @@ public abstract class Pessoa {
 	private String senha;
 	private String tipo;
 	
-	public Pessoa() {
-		
-	}
 	
+	public Pessoa (String cpf, String senha) {
+		this.cpf = cpf;
+		this.senha = senha;
+	}
 	public Pessoa(String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha, String tipo) {
 		this.nome = nome;
 		this.cpf = cpf;
@@ -26,7 +27,9 @@ public abstract class Pessoa {
 		this.tipo = tipo;
 	}
 	
-	
+	public int getID() {
+		return pessoaID;
+	}
 	
 	public String getNome() {
 		return nome;
