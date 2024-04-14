@@ -14,6 +14,10 @@ public class Personal extends Pessoa{
 		this.cref = cref;
 		this.horarioAtendimento = horarioAtendimento;
 	}
+	
+	public Personal(String cpf, String senha) {
+		super(cpf, senha);
+	}
 
 	public String getEspecialidade() {
 		return especialidade;

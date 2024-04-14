@@ -7,7 +7,7 @@ public class MenuAluno {
 	public static PrintStream exibeMenuAluno() {
 		return  System.out.printf("""
 				 --------------------------------------------------------
-				 	  BEM VINDO _______(nome do aluno)
+				 	                  BEM VINDO 
 				 --------------------------------------------------------			
 				 1. Visualizar dados pessoais e plano contratado.
 				 2. Solicitar agendamento de horário com personal trainer.

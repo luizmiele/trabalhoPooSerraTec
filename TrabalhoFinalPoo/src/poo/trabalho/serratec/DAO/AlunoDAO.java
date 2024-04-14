@@ -67,24 +67,8 @@ public static ResultSet getHorarioAtendimentoPorAluno(Aluno aluno) {
 		return horarioAgendamento;
 }
 
-	public ResultSet autenticaLogin(Aluno aluno) {
-		PreparedStatement ps = null;
-		
-			String sqlNomeSenha = "SELECT * FROM PESSOA WHERE CPF = ? AND SENHA = ? ";
-		
-			try {
-				ps = ConexaoBD.getConexao().prepareStatement(sqlNomeSenha);
-				ps.setString(1, aluno.getCpf());
-				ps.setString(2, aluno.getSenha());
-				
-				ResultSet rs = ps.executeQuery();
-				return rs;
-						
-			}catch(SQLException e) {
-				e.printStackTrace();
-				return null;
-			}
-	}
+	
+	
 	
 	public int getPlanoID(Aluno aluno) {
 		String sqlGetPlanoID = "SELECT planoID FROM PLANO WHERE nomePlano = ?";

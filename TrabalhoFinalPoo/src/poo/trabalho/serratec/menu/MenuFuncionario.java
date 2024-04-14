@@ -7,7 +7,7 @@ public class MenuFuncionario {
 	public static PrintStream exibeMenuFuncionario() {
 		return  System.out.printf("""
 				 --------------------------------------------------------
-				 	  BEM VINDO _______(nome do funcionario)
+				 	                  BEM VINDO
 				 --------------------------------------------------------			
 				 1. Cadastrar novo plano
 				 2. Cadastrar novo aluno
