@@ -1,4 +1,4 @@
-package poo.trabalho.serratec.models;
+package poo.trabalho.serratec.model;
 
 import java.time.LocalDate;
 

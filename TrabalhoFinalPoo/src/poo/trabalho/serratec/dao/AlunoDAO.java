@@ -1,11 +1,11 @@
-package poo.trabalho.serratec.DAO;
+package poo.trabalho.serratec.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import poo.trabalho.serratec.conexao.ConexaoBD;
-import poo.trabalho.serratec.models.Aluno;
+import poo.trabalho.serratec.model.Aluno;
 
 public class AlunoDAO {
 	static PreparedStatement ps = null;
@@ -45,7 +45,34 @@ public class AlunoDAO {
 		}	
 	}
 	
-public static ResultSet getHorarioAtendimentoPorAluno(Aluno aluno) {
+	public void getDadosPessoaisAluno(Aluno aluno) {
+		
+		String sqlDadosPessoaisAluno = "SELECT pessoa.*, aluno.*, plano.*\r\n"
+				+ "FROM pessoa\r\n"
+				+ "JOIN aluno ON pessoa.pessoaID = aluno.alunoID\r\n"
+				+ "JOIN plano ON aluno.planoContratado = plano.planoID\r\n"
+				+ "WHERE aluno.CPF = ?;\r\n"
+				+ "";
+		
+		ResultSet rs;
+		
+		try {
+			ps = ConexaoBD.getConexao().prepareStatement(sqlDadosPessoaisAluno);
+			ps.setString(1, aluno.getCpf());
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				System.out.println(rs);
+			} else {
+				System.out.println("Aluno não encontrado!");
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static ResultSet getHorarioAtendimentoPorAluno(Aluno aluno) {
 		
 		String sqlGetHorario = "SELECT * FROM agendamento WHERE alunoID = ? ";
 		ResultSet rs;
@@ -91,9 +118,9 @@ public static ResultSet getHorarioAtendimentoPorAluno(Aluno aluno) {
 		return planoID;
 	}
 	
-@Override
-public String toString() {
-	return super.toString();
+	@Override
+	public String toString() {
+		return super.toString();
 }
 	
 	

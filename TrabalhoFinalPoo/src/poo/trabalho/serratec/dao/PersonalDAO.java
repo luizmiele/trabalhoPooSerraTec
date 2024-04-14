@@ -1,10 +1,10 @@
-package poo.trabalho.serratec.DAO;
+package poo.trabalho.serratec.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import poo.trabalho.serratec.conexao.ConexaoBD;
-import poo.trabalho.serratec.models.Personal;
+import poo.trabalho.serratec.model.Personal;
 
 public class PersonalDAO {
 static PreparedStatement ps = null;

@@ -1,4 +1,4 @@
-package poo.trabalho.serratec.DAO;
+package poo.trabalho.serratec.dao;
 
 import java.sql.PreparedStatement;
 

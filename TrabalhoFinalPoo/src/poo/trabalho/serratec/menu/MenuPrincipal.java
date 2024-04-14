@@ -2,6 +2,8 @@ package poo.trabalho.serratec.menu;
 
 import java.util.Scanner;
 
+import poo.trabalho.serratec.dao.AlunoDAO;
+
 public class MenuPrincipal {
 	
 	public static int leMenu(String tipo) {
@@ -65,8 +67,9 @@ public class MenuPrincipal {
 		return opcao;
 	}
 	
-	public static void menuFuncionario(int opcaoMenu) {
+	public static boolean menuFuncionario(int opcaoMenu) {
 	    int opcao = -1;
+	    boolean retorna = true;
 	    
 	    while (opcao != 8) {
 	    	  opcao = opcaoMenu;
@@ -86,21 +89,23 @@ public class MenuPrincipal {
 	        } else if (opcao == 7) {
 	            System.out.println("\nEmitindo relação de avaliações físicas por período...\n");
 	        } else if (opcao == 8) {
-	        	System.out.println("\nVoltando ao Menu Principal... \n");
+	        	retorna = false;
 	        } else{
 	            System.out.println("\nOpção inválida! Tente novamente.\n");
 	        }
 	    }
+		return retorna;
 	}
 	
-	public static void menuAluno(int opcaoMenu) {
+	public static boolean menuAluno(int opcaoMenu) {
 	    int opcao = -1;
+	    boolean retorna = true;
 	    
 	    while (opcao != 6) {
 	        opcao = opcaoMenu;
-	        
-	        
 	        if (opcao == 1) {
+	        	AlunoDAO.getDadosPessoaisAluno(aluno);
+	        	
 	            System.out.println("\nVisualizando dados pessoais e plano contratado...\n");
 	            break;
 	        } else if (opcao == 2) {
@@ -117,17 +122,19 @@ public class MenuPrincipal {
 	            break;
 	        } else if (opcao == 6) {
 	        	System.out.println("\nPrograma Finalizado.\n");
-	        	break;
+	        	retorna = false;
 	        } else{
 	            System.out.println("\nOpção inválida! Tente novamente.\n");
 	        }
 	    }
+		return retorna;
 	}
 	
 	
 	
-	public static void menuPersonalTrainer(int opcaoMenu) {
+	public static boolean menuPersonal(int opcaoMenu) {
 	    int opcao = -1;
+	    boolean retorna = true;
 	    
 	    while (opcao != 4) {
 	        MenuPersonal.exibeMenuPersonal();
@@ -140,10 +147,12 @@ public class MenuPrincipal {
 	        } else if (opcao == 3) {
 	            System.out.println("\nVisualizando lista de avaliações realizadas...\n");
 	        } else if (opcao == 4) {
+	        	retorna = false;
 	        	System.out.println("\nFinalizando Programa!\n");
 	        } else {
 	            System.out.println("\nOpção inválida! Tente novamente.\n");
 	        }
 	    }
+		return retorna;
 	}
 }

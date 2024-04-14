@@ -18,17 +18,26 @@ public class MenuLogin {
 		String senhaInserido = sc.nextLine();
 		
 		String rsLogin = autenticaLogin(cpfInserido, senhaInserido);
-		System.out.println(rsLogin);
-		
 		if(rsLogin.equalsIgnoreCase("Aluno")) {	
-			int opcaoInserida = MenuPrincipal.leMenu("aluno");
-			MenuPrincipal.menuAluno(opcaoInserida);	
+			boolean retorna = true;
+			while(retorna) {
+				retorna = true;
+				int opcaoInserida = MenuPrincipal.leMenu("aluno");
+				retorna = MenuPrincipal.menuAluno(opcaoInserida);
+				
+			}
 		}else if(rsLogin.equalsIgnoreCase("Personal")) {
-			int opcaoInserida = MenuPrincipal.leMenu("personal");
-			MenuPrincipal.menuAluno(opcaoInserida);
+			boolean retorna = true;
+			while(retorna) {
+				int opcaoInserida = MenuPrincipal.leMenu("personal");
+				retorna = MenuPrincipal.menuPersonal(opcaoInserida);
+			}
 		}else if(rsLogin.equalsIgnoreCase("Funcionario")) {
+			boolean retorna = true;
+			while(retorna) {
 			int opcaoInserida = MenuPrincipal.leMenu("funcionario");
-			MenuPrincipal.menuFuncionario(opcaoInserida);
+			retorna = MenuPrincipal.menuFuncionario(opcaoInserida);
+			}
 		}
 		sc.close();
 	}
