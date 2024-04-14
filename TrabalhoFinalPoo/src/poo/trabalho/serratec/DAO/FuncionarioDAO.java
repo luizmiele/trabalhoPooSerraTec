@@ -23,8 +23,7 @@ public class FuncionarioDAO {
 			ps.setString(5, funcionario.getTelefone());
 			ps.setString(6, funcionario.getSenha());
 			ps.setString(7, "Funcionario");
-			ps.executeUpdate(); //executeUpdate é pra insert
-								//executequery  é pra read
+			ps.executeUpdate(); 
 			
 			ps.close();
 		} catch (SQLException e) {

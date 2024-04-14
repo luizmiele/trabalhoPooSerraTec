@@ -14,6 +14,7 @@ public class MenuAluno {
 				 3. Visualizar histórico de agendamentos.
 				 4. Cancelar agendamento.
 				 5. Visualizar avaliações físicas.
+				 6. Sair.
 		
 				 Informe a opção desejada:
 				"""

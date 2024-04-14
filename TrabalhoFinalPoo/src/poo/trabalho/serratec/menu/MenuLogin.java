@@ -20,15 +20,16 @@ public class MenuLogin {
 		String rsLogin = autenticaLogin(cpfInserido, senhaInserido);
 		System.out.println(rsLogin);
 		
-		if(rsLogin.equalsIgnoreCase("Aluno")) {
-			//cadastraAlunoLocal(cpfInserido) <--- "SELECT * FROM PESSOA "
-			MenuAluno.exibeMenuAluno();
+		if(rsLogin.equalsIgnoreCase("Aluno")) {	
+			int opcaoInserida = MenuPrincipal.leMenu("aluno");
+			MenuPrincipal.menuAluno(opcaoInserida);	
 		}else if(rsLogin.equalsIgnoreCase("Personal")) {
-			MenuPersonal.exibeMenuPersonal();
+			int opcaoInserida = MenuPrincipal.leMenu("personal");
+			MenuPrincipal.menuAluno(opcaoInserida);
 		}else if(rsLogin.equalsIgnoreCase("Funcionario")) {
-			MenuFuncionario.exibeMenuFuncionario();
+			int opcaoInserida = MenuPrincipal.leMenu("funcionario");
+			MenuPrincipal.menuFuncionario(opcaoInserida);
 		}
-		
 		sc.close();
 	}
 
@@ -51,13 +52,10 @@ public class MenuLogin {
 						return tipo;
 					}else {
 						System.out.println("CPF OU SENHA INVALIDO!");
-						
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
-				}
-					
-						
+				}			
 			}catch(SQLException e) {
 				e.printStackTrace();
 				return null;

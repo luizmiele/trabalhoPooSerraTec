@@ -12,6 +12,7 @@ public class MenuPersonal {
 				 1. Visualizar agenda de atendimentos.
 				 2. Registrar avaliações físicas dos alunos.
 				 3. Visualizar lista de avaliações realizadas.
+				 4. Sair.
 
 				 Informe a opção desejada:
 				"""

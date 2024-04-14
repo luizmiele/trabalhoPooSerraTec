@@ -22,8 +22,8 @@ static PreparedStatement ps = null;
 			ps.setString(5, personal.getTelefone());
 			ps.setString(6, personal.getSenha());
 			ps.setString(7, "Personal");
-			ps.executeUpdate(); //executeUpdate é pra insert
-								//executequery  é pra read
+			ps.executeUpdate(); 
+			
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -41,7 +41,6 @@ static PreparedStatement ps = null;
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 }

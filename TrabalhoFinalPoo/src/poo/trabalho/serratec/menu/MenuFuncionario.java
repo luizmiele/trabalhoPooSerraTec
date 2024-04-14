@@ -16,6 +16,7 @@ public class MenuFuncionario {
 				 5. Emitir relatório de alunos
 				 6. Emitir relatório de equipe (funcionários e personal trainers)
 				 7. Emitir relação de avaliações físicas por período
+				 8. Sair.
 				 
 				 Informe a opção desejada:
 				"""
