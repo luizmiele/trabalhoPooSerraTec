@@ -4,10 +4,10 @@ import java.io.PrintStream;
 
 public class MenuAluno {
 		
-	public static PrintStream exibeMenuAluno() {
+	public static PrintStream exibeMenuAluno(String nome) {
 		return  System.out.printf("""
 				 --------------------------------------------------------
-				 	                  BEM VINDO 
+				 	                  BEM VINDO %s
 				 --------------------------------------------------------			
 				 1. Visualizar dados pessoais e plano contratado.
 				 2. Solicitar agendamento de horário com personal trainer.
@@ -17,7 +17,7 @@ public class MenuAluno {
 				 6. Sair.
 		
 				 Informe a opção desejada:
-				"""
+				""", nome
 				);
 	}
 }

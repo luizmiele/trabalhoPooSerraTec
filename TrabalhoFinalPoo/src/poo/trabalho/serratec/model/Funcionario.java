@@ -1,7 +1,6 @@
 package poo.trabalho.serratec.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Funcionario extends Pessoa {
 	private String cargo;
@@ -20,15 +19,8 @@ public class Funcionario extends Pessoa {
 		return cargo;
 	}
 
-
 	@Override
 	public String toString() {
 		return super.toString() + "Cargo: " + cargo;
 	}
-
-	
-	
-	
-	
-	
 }

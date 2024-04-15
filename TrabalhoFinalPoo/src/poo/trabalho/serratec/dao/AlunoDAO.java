@@ -44,25 +44,41 @@ public class AlunoDAO {
 			e.printStackTrace();
 		}	
 	}
-	
-	public void getDadosPessoaisAluno(Aluno aluno) {
+	// TERMINAR AQUI AINDA. PENSAR NA LOGICA PRA PEGAR O ID DO ALUNO
+	public static String getDadosPessoaisAluno(String cpfInserido) {
+		ResultSet rs = null;
+		String stringFormatada = "";
 		
 		String sqlDadosPessoaisAluno = "SELECT pessoa.*, aluno.*, plano.*\r\n"
 				+ "FROM pessoa\r\n"
 				+ "JOIN aluno ON pessoa.pessoaID = aluno.alunoID\r\n"
 				+ "JOIN plano ON aluno.planoContratado = plano.planoID\r\n"
-				+ "WHERE aluno.CPF = ?;\r\n"
+				+ "WHERE pessoa.CPF = ?;\r\n"
 				+ "";
 		
-		ResultSet rs;
 		
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlDadosPessoaisAluno);
-			ps.setString(1, aluno.getCpf());
+			ps.setString(1,cpfInserido);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				System.out.println(rs);
+				String nome =rs.getString("nome");
+				String cpf =rs.getString("CPF");
+				String dataNascimento =rs.getString("dataNascimento");
+				String telefone =rs.getString("telefone");
+				String email =rs.getString("email");
+				String planoContratado = rs.getString("nomePlano");
+				
+				stringFormatada = String.format("""
+						Nome: %s
+						CPF:  %s
+						DataNascimento: %s
+						Telefone: %s
+						Email: %s
+						plano Contratado: %s
+						""", nome,cpf,dataNascimento,telefone,email,planoContratado);
+				
 			} else {
 				System.out.println("Aluno não encontrado!");
 			}
@@ -70,6 +86,7 @@ public class AlunoDAO {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return stringFormatada;
 	}
 	
 	public static ResultSet getHorarioAtendimentoPorAluno(Aluno aluno) {

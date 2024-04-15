@@ -3,6 +3,8 @@ package poo.trabalho.serratec.menu;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import poo.trabalho.serratec.conexao.ConexaoBD;
@@ -17,36 +19,37 @@ public class MenuLogin {
 		System.out.println("Insira a senha:");
 		String senhaInserido = sc.nextLine();
 		
-		String rsLogin = autenticaLogin(cpfInserido, senhaInserido);
-		if(rsLogin.equalsIgnoreCase("Aluno")) {	
+		List<String> rsLogin = autenticaLogin(cpfInserido, senhaInserido);
+		if(rsLogin.get(1).equalsIgnoreCase("Aluno")) {	
 			boolean retorna = true;
 			while(retorna) {
 				retorna = true;
-				int opcaoInserida = MenuPrincipal.leMenu("aluno");
-				retorna = MenuPrincipal.menuAluno(opcaoInserida);
-				
+				int opcaoInserida = MenuPrincipal.leMenu(rsLogin.get(1), rsLogin.get(0));
+				retorna = MenuPrincipal.menuAluno(opcaoInserida);	
 			}
-		}else if(rsLogin.equalsIgnoreCase("Personal")) {
+		}else if(rsLogin.get(1).equalsIgnoreCase("personal")) {
 			boolean retorna = true;
 			while(retorna) {
-				int opcaoInserida = MenuPrincipal.leMenu("personal");
+				int opcaoInserida = MenuPrincipal.leMenu(rsLogin.get(1), rsLogin.get(0));
 				retorna = MenuPrincipal.menuPersonal(opcaoInserida);
 			}
-		}else if(rsLogin.equalsIgnoreCase("Funcionario")) {
+		}else if(rsLogin.get(1).equalsIgnoreCase("funcionario")) {
 			boolean retorna = true;
 			while(retorna) {
-			int opcaoInserida = MenuPrincipal.leMenu("funcionario");
+			int opcaoInserida = MenuPrincipal.leMenu(rsLogin.get(1), rsLogin.get(0));
 			retorna = MenuPrincipal.menuFuncionario(opcaoInserida);
 			}
 		}
 		sc.close();
 	}
 
-	public static String autenticaLogin(String cpf, String senha) {
+	public static List<String> autenticaLogin(String cpf, String senha) {
 		PreparedStatement ps = null;
+		String nome = "";
 		String tipo = "";
+		List<String> alunoLocal = new ArrayList<>();
 		
-			String sqlNomeSenha = "SELECT TIPO FROM PESSOA WHERE CPF = ? AND SENHA = ? ";
+			String sqlNomeSenha = "SELECT NOME, TIPO FROM PESSOA WHERE CPF = ? AND SENHA = ? ";
 		
 			try {
 				ps = ConexaoBD.getConexao().prepareStatement(sqlNomeSenha);
@@ -57,8 +60,13 @@ public class MenuLogin {
 				
 				try {
 					if(rs.next()) {
+						nome = rs.getString("NOME");
 						tipo = rs.getString("TIPO");
-						return tipo;
+				
+						alunoLocal.add(nome);
+						alunoLocal.add(tipo);
+						
+						return alunoLocal;
 					}else {
 						System.out.println("CPF OU SENHA INVALIDO!");
 					}
@@ -69,6 +77,6 @@ public class MenuLogin {
 				e.printStackTrace();
 				return null;
 			}
-			return tipo;
+			return alunoLocal;
 	}
 }

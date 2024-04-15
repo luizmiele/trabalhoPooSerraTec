@@ -1,5 +1,6 @@
 package poo.trabalho.serratec.util;
 
 public class ValidaLogin {
-	//logica de validação do login
+	
+	
 }

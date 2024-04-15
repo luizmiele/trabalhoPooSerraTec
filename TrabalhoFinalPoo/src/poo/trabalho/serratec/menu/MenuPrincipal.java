@@ -6,31 +6,29 @@ import poo.trabalho.serratec.dao.AlunoDAO;
 
 public class MenuPrincipal {
 	
-	public static int leMenu(String tipo) {
+	public static int leMenu(String tipo, String nome) {
 		Scanner  s = new Scanner(System.in);
 		int opcao = 0;
 		boolean validador = true;
 		
 		do {			
 			if(tipo.equalsIgnoreCase("aluno")) {
-			MenuAluno.exibeMenuAluno();
-			 if (s.hasNextInt()) {
-				 opcao = s.nextInt();
-			 } else {
-				 opcao = -1;
-			 }
-			
-			if(opcao < 1 || opcao > 6 ) {
-				System.out.println("Opção inválida!");
-				validador = false;
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-				
-			} else if (tipo.equalsIgnoreCase("funcionario")) {
+			MenuAluno.exibeMenuAluno(nome);
+				 if (s.hasNextInt()) {
+					 opcao = s.nextInt();
+				 } else {
+					 opcao = -1;
+				 }
+				if(opcao < 1 || opcao > 6 ) {
+					System.out.println("Opção inválida!");
+					validador = false;
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}	
+			 }else if (tipo.equalsIgnoreCase("funcionario")) {
 				MenuFuncionario.exibeMenuFuncionario();
 				if (s.hasNextInt()) {
 					 opcao = s.nextInt();
@@ -104,9 +102,7 @@ public class MenuPrincipal {
 	    while (opcao != 6) {
 	        opcao = opcaoMenu;
 	        if (opcao == 1) {
-	        	AlunoDAO.getDadosPessoaisAluno(aluno);
-	        	
-	            System.out.println("\nVisualizando dados pessoais e plano contratado...\n");
+	        	System.out.println(AlunoDAO.getDadosPessoaisAluno("123"));
 	            break;
 	        } else if (opcao == 2) {
 	            System.out.println("\nSolicitando agendamento de horário com personal trainer...\n");
@@ -129,8 +125,6 @@ public class MenuPrincipal {
 	    }
 		return retorna;
 	}
-	
-	
 	
 	public static boolean menuPersonal(int opcaoMenu) {
 	    int opcao = -1;
