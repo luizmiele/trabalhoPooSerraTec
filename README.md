@@ -52,8 +52,11 @@ Decidimos utilizar um banco de dados para registrar as informações do nosso pr
 Acessos:
 
 ADM          ID 5           login 123        senha 456
+
 Personal     ID 6           login 111        senha 222
+
 Aluno        ID 11          login 333        senha 444
+
 
 Segue o modelo e população do banco de dados:
 
