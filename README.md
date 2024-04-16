@@ -21,7 +21,7 @@ Conexão, DAO, Main, Menu, Model, Service, Util.
 
 ### Model:
 
-No Package Model temos os a modelagem dos objetos, como a classe abstrata para Pessoa e suas extensões como Aluno.
+No Package Model temos os a modelagem dos objetos, como a classe abstrata para Pessoa e suas extensões, como por exemplo, Aluno.
 
 ![image](https://github.com/luizmiele/trabalhoPooSerraTec/assets/164147010/bf9b2ab9-cdfa-4bb5-8a4a-5813afb64de0)
 
