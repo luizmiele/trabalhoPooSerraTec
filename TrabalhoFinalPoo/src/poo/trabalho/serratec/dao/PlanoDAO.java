@@ -117,7 +117,7 @@ public class PlanoDAO {
 						String nome = rs.getString("nomePlano");
 						int duracao = rs.getInt("duracao");
 						double valor = rs.getDouble("valor");
-						String descricao = rs.getNString("descricao");
+						String descricao = rs.getString("descricao");
 						
 						planoAluno = new Plano(nome, duracao, valor, descricao);
 						return planoAluno;
@@ -133,7 +133,7 @@ public class PlanoDAO {
 	}
 	
 	public static StringBuilder getAllPlanos() {
-		StringBuilder todosPlanos = null;
+		StringBuilder todosPlanos = new StringBuilder();
 		ResultSet rs;
 		String stringFormatada = "";
 		String sqlGetNomePlano = "SELECT * FROM PLANO";
@@ -163,4 +163,25 @@ public class PlanoDAO {
 		}
 		return todosPlanos; 
 	}
+	
+	public static int getPlanoID(String nomePlano) {
+		String sqlGetPlanoID = "SELECT planoID FROM PLANO WHERE nomePlano = ?";
+		ResultSet rs;
+		int planoID = 0;
+		
+		try {
+			ps = ConexaoBD.getConexao().prepareStatement(sqlGetPlanoID);
+			ps.setString(1, nomePlano);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				planoID = rs.getInt("planoID");
+			} else {
+				System.out.println("Aluno não encontrado!");
+			}		
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return planoID;
+	}	
 }

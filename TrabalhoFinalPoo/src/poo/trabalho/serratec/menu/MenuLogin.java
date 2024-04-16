@@ -26,27 +26,24 @@ public class MenuLogin {
 			
 			List<String> rsLogin = MenuDAO.autenticaLogin(cpfInserido, senhaInserido);
 			if(rsLogin.get(1).equalsIgnoreCase("Aluno")) {	
-				Aluno alunoLogado = new Aluno(cpfInserido, senhaInserido);
+				Aluno alunoLogado = new Aluno(cpfInserido, "aluno", senhaInserido);
 				retorna = true;
 				while(retorna) {
 					retorna = MenuPrincipal.menuAluno(alunoLogado);	
 				}
 			}else if(rsLogin.get(1).equalsIgnoreCase("personal")) {
-				Personal personalLogado = new Personal(cpfInserido, senhaInserido);
+				Personal personalLogado = new Personal(cpfInserido, "personal", senhaInserido);
 				retorna = true;
 				while(retorna) {
 					retorna = MenuPrincipal.menuPersonal(personalLogado);
 				}
 			}else if(rsLogin.get(1).equalsIgnoreCase("funcionario")) {
-				Funcionario funcionarioLogado = new Funcionario(cpfInserido, senhaInserido);
+				Funcionario funcionarioLogado = new Funcionario(cpfInserido, "funcionario", senhaInserido);
 				retorna = true;
 				while(retorna) {
-				int opcaoInserida = MenuPrincipal.menuFuncionario(funcionarioLogado);
-				MenuPrincipal.menuFuncionario(opcaoInserida);
+					retorna = MenuPrincipal.menuFuncionario(funcionarioLogado);
 				}
 			}
 		}
 	}
-
-	
 }

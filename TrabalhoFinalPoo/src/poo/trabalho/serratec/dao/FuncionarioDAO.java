@@ -85,5 +85,42 @@ public class FuncionarioDAO {
 		return stringFormatada;
 	}
 	
-	
+	public static StringBuilder getTodosFuncionarios() {
+		StringBuilder todosFuncionarios = new StringBuilder();
+		ResultSet rs;
+		String stringFormatada = "";
+		String sqlGetNomePlano = "SELECT * FROM pessoa "
+				+ "JOIN funcionario on funcionario.funcionarioID = pessoa.pessoaID "
+				+ "where tipo = 'funcionario'" ;
+		
+		try {
+			ps = ConexaoBD.getConexao().prepareStatement(sqlGetNomePlano);
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				int funcionarioID = rs.getInt("funcionarioID");
+				String nome = rs.getString("nome");
+				String dataNascimento = rs.getString("dataNascimento");
+				String telefone = rs.getString("telefone");
+				String email = rs.getString("email");
+				String cargo = rs.getString("cargo");
+				
+				stringFormatada = String.format(
+				"""
+			|			
+			|	ID do Funcionario: %d             
+			|	Nome : %s					 
+			|	Data Nascimento: %s			 
+			|	Telefone: %s				 
+			|	Email: %s					 				 
+			|	Cargo: %s   
+			|___________________________________________________________________________	
+				""", funcionarioID, nome, dataNascimento, telefone, email, cargo);
+				todosFuncionarios.append(stringFormatada);
+			} 
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return todosFuncionarios; 
+	}
 }

@@ -15,8 +15,8 @@ public class Personal extends Pessoa{
 		this.horarioAtendimento = horarioAtendimento;
 	}
 	
-	public Personal(String cpf, String senha) {
-		super(cpf, senha);
+	public Personal(String cpf, String tipo, String senha) {
+		super(cpf, tipo, senha);
 	}
 
 	public Especialidade getEspecialidade() {

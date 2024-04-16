@@ -2,6 +2,7 @@ package poo.trabalho.serratec.dao;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import poo.trabalho.serratec.conexao.ConexaoBD;
@@ -43,5 +44,48 @@ static PreparedStatement ps = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
+	}
+	
+	public static StringBuilder getTodosPersonal() {
+		StringBuilder todosPersonal = new StringBuilder();
+		ResultSet rs;
+		String stringFormatada = "";
+		String sqlGetNomePlano = "SELECT * FROM pessoa "
+				+ "JOIN personal on personal.personalID = pessoa.pessoaID "
+				+ "where tipo = 'personal'";
+		
+		try {
+			ps = ConexaoBD.getConexao().prepareStatement(sqlGetNomePlano);
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				int personalID = rs.getInt("personalID");
+				String nome = rs.getString("nome");
+				String dataNascimento = rs.getString("dataNascimento"); 
+				String telefone = rs.getString("telefone");
+				String email = rs.getString("email");
+				String tipo = rs.getString("tipo");
+				String especialidade = rs.getString("especialidade");
+				String horarioAgendamentos = rs.getString("horarioAgendamentos");
+				
+				stringFormatada = String.format(
+				"""
+			|			
+			|	ID do Personal: %d             
+			|	Nome : %s					 
+			|	Data Nascimento: %s			 
+			|	Telefone: %s				 
+			|	Email: %s					 
+			|	Tipo: %s					 
+			|	Especialidade: %s            
+			|	Horário de atendimento: %s   
+			|___________________________________________________________________________
+				""", personalID, nome, dataNascimento, telefone, email, tipo, especialidade, horarioAgendamentos);
+				todosPersonal.append(stringFormatada);
+			} 
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return todosPersonal; 
 	}
 }

@@ -13,8 +13,9 @@ public abstract class Pessoa {
 	private String tipo;
 	
 	
-	public Pessoa (String cpf, String senha) {
+	public Pessoa (String cpf, String tipo, String senha) {
 		this.cpf = cpf;
+		this.tipo = tipo;
 		this.senha = senha;
 	}
 	public Pessoa(String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha, String tipo) {

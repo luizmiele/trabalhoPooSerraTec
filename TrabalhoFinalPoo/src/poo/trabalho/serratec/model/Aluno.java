@@ -15,8 +15,8 @@ public class Aluno extends Pessoa{
 		this.dataMatricula = dataMatricula;
 	}
 
-	public Aluno(String cpf, String senha) {
-		super(cpf, senha);
+	public Aluno(String cpf, String tipo, String senha) {
+		super(cpf, tipo, senha);
 	}
 
 

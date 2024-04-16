@@ -35,7 +35,7 @@ public class AlunoDAO {
 		
 		try {
 			PreparedStatement ps = ConexaoBD.getConexao().prepareStatement(sqlAluno);
-			ps.setInt(1, getPlanoID(aluno.getPlanoContratado()));
+			ps.setInt(1, PlanoDAO.getPlanoID(aluno.getPlanoContratado().getNomePlano()));
 			ps.setObject(2,LocalDateTime.now()); // TESTAR PARA VE SE O SETOBJECT VAI FUNCIONAR
 			ps.executeUpdate();
 			
@@ -88,20 +88,20 @@ public class AlunoDAO {
 		return stringFormatada;
 	}
 	
-	public static StringBuilder getAllAlunos() {
-		StringBuilder todosAlunos = null;
+	public static StringBuilder getTodosAlunos() {
+		StringBuilder todosAlunos = new StringBuilder();
 		ResultSet rs;
 		String stringFormatada = "";
-		String sqlGetNomePlano = "SELECT * FROM ALUNO";
+		String sqlGetNomePlano = "SELECT * FROM pessoa where tipo = 'aluno'";
 		
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlGetNomePlano);
 			rs = ps.executeQuery();
 
 			while(rs.next()) {
-				int alunoID = rs.getInt("alunoID");
+				int alunoID = rs.getInt("pessoaID");
 				String nome = rs.getString("nome");
-				String dataNascimento = rs.getString("dataNascimento");
+				String dataNascimento = rs.getString("dataNascimento"); // POSSIVEL ERRO!
 				String telefone = rs.getString("telefone");
 				String email = rs.getString("email");
 				
@@ -142,31 +142,7 @@ public class AlunoDAO {
 			e.printStackTrace();
 		}
 		return horarioAgendamento;
-}
-
-	public static int getPlanoID(String nomePlano) {
-		String sqlGetPlanoID = "SELECT planoID FROM PLANO WHERE nomePlano = ?";
-		ResultSet rs;
-		int planoID = 0;
-		
-		try {
-			ps = ConexaoBD.getConexao().prepareStatement(sqlGetPlanoID);
-			ps.setString(1, nomePlano);
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				planoID = rs.getInt("planoID");
-			} else {
-				System.out.println("Aluno não encontrado!");
-			}		
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return planoID;
 	}
+
 	
-	@Override
-	public String toString() {
-		return super.toString();
-}	
 }

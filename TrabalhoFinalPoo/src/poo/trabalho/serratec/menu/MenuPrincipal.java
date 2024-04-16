@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 import poo.trabalho.serratec.dao.AlunoDAO;
+import poo.trabalho.serratec.dao.FuncionarioDAO;
 import poo.trabalho.serratec.dao.PersonalDAO;
 import poo.trabalho.serratec.dao.PlanoDAO;
 import poo.trabalho.serratec.model.Aluno;
@@ -22,7 +23,7 @@ public class MenuPrincipal {
 		
 		do {			
 			if(tipo.equalsIgnoreCase("aluno")) {
-			MenuAluno.exibeMenuAluno(nome);
+				MenuAluno.exibeMenuAluno(nome);
 				 if (s.hasNextInt()) {
 					 opcao = s.nextInt();
 				 } else {
@@ -115,13 +116,15 @@ public class MenuPrincipal {
 	        	System.out.println(PlanoDAO.getAllPlanos()); 
 	        } else if (opcao == 5) {
 	            System.out.println("\nEmitindo relatório de alunos...\n");
-	            
+	            System.out.println(AlunoDAO.getTodosAlunos());
 	        } else if (opcao == 6) {
 	            System.out.println("\nEmitindo relatório de equipe... \n");
+	            System.out.println(FuncionarioDAO.getTodosFuncionarios());
+	            System.out.println(PersonalDAO.getTodosPersonal());
 	        } else if (opcao == 7) {
 	            System.out.println("\nEmitindo relação de avaliações físicas por período...\n");
 	        } else if (opcao == 8) {
-	        	break;
+	        	return retorna;
 	        } else{
 	            System.out.println("\nOpção inválida! Tente novamente.\n");
 	        }
