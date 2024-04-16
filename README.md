@@ -32,6 +32,10 @@ Classe Main, que gerencia a interação com o usuário através do package Menu.
 Login:
 ![image](https://github.com/luizmiele/trabalhoPooSerraTec/assets/164147010/8822e5a5-3c7b-4030-884f-c53ff8e2d6d3)
 
+Menu principal:
+![image](https://github.com/luizmiele/trabalhoPooSerraTec/assets/164147010/dc1d07e1-f8a5-49a4-b6c5-4afa70baf46c)
+
+
 
 
 
