@@ -8,7 +8,7 @@ Lucas Amorim Rodrigues,
 
 Ismael Jagne,
 
-Dionatan .
+Dionatan de Andrade Cardoso.
 
 ## Sistema de Gerenciamento de Academia:
 
