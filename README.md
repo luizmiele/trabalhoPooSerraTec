@@ -1,4 +1,4 @@
-# Projeto Programação Orientada a Objeto - Grupo 4
+# Programação Orientada a Objeto - Grupo 4
 ## Alunos:
 
 César Guerra Peixe, 
