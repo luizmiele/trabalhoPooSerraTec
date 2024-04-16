@@ -85,23 +85,13 @@ create table personal (
 	Foreign key (personalID) references pessoa(pessoaID)
 );
 
-create table agendamento (
-	agendamentoID SERIAL primary key,
-	data date,
-	horario Time,
-	personalID int,
-	alunoID int,
-	foreign key (personalID) references personal(personalID),
-	foreign key (alunoID) references aluno(alunoID)
-);
-
 create table aluno (
 	alunoID int primary key,
 	planoContratado int,
 	dataMatricula Date,
 	Foreign key (alunoID) references pessoa(pessoaID),
 	Foreign key (planoContratado) references plano(planoID)
-)
+);
 
 create table Avaliacao (
 avaliacaoID SERIAL primary key,
@@ -111,6 +101,16 @@ data Date not null,
 descricao VARCHAR(200) not null,
 Foreign key (alunoID) references aluno(alunoID),
 Foreign key (personalID) references personal(personalID) 
+);
+
+create table agendamento (
+	agendamentoID SERIAL primary key,
+	data date,
+	horario Time,
+	personalID int,
+	alunoID int,
+	foreign key (personalID) references personal(personalID),
+	foreign key (alunoID) references aluno(alunoID)
 );
 ```
 
