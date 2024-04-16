@@ -35,6 +35,16 @@ Login:
 Menu principal:
 ![image](https://github.com/luizmiele/trabalhoPooSerraTec/assets/164147010/dc1d07e1-f8a5-49a4-b6c5-4afa70baf46c)
 
+### Conexão:
+Decidimos utilizar um banco de dados para registrar as informações do nosso projeto, através do package Conexão.
+![image](https://github.com/luizmiele/trabalhoPooSerraTec/assets/164147010/eaeaa721-85a4-4c8d-8edb-b9b3aa686266)
+
+Segue o modelo e população do banco de dados:
+```
+
+```
+
+
 
 
 
