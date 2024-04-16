@@ -88,6 +88,40 @@ public class AlunoDAO {
 		return stringFormatada;
 	}
 	
+	public static StringBuilder getAllAlunos() {
+		StringBuilder todosAlunos = null;
+		ResultSet rs;
+		String stringFormatada = "";
+		String sqlGetNomePlano = "SELECT * FROM ALUNO";
+		
+		try {
+			ps = ConexaoBD.getConexao().prepareStatement(sqlGetNomePlano);
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				int alunoID = rs.getInt("alunoID");
+				String nome = rs.getString("nome");
+				String dataNascimento = rs.getString("dataNascimento");
+				String telefone = rs.getString("telefone");
+				String email = rs.getString("email");
+				
+				stringFormatada = String.format(
+				"""
+						ID do Aluno: %d
+						Nome : %s
+						Data Nascimento: %s
+						Telefone: %s
+						Email: %s
+			___________________________________________________________		
+				""", alunoID, nome, dataNascimento, telefone, email);
+				todosAlunos.append(stringFormatada);
+			} 
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return todosAlunos; 
+	}
+	
 	public static ResultSet getHorarioAtendimentoPorAluno(String cpf) {
 		
 		String sqlGetHorario = "SELECT * FROM agendamento WHERE CPF = ? ";

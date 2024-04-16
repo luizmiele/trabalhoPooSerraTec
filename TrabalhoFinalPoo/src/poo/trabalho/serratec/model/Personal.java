@@ -3,12 +3,12 @@ package poo.trabalho.serratec.model;
 import java.time.LocalDate;
 
 public class Personal extends Pessoa{
-	private String especialidade;
+	private Especialidade especialidade;
 	private String cref;
 	private String horarioAtendimento;
 	
 	public Personal(String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha, String tipo, 
-			String especialidade, String cref, String horarioAtendimento) {
+			Especialidade especialidade, String cref, String horarioAtendimento) {
 		super(nome, cpf, dataNascimento, telefone, email, senha, tipo);
 		this.especialidade = especialidade;
 		this.cref = cref;
@@ -19,7 +19,7 @@ public class Personal extends Pessoa{
 		super(cpf, senha);
 	}
 
-	public String getEspecialidade() {
+	public Especialidade getEspecialidade() {
 		return especialidade;
 	}
 

@@ -1,8 +1,9 @@
 package poo.trabalho.serratec.model;
 
 public enum Especialidade {
-	MUSCULAÇÂO, 
+	MUSCULACAO, 
 	CROSSFIT, 
 	CAPOEIRA, 
 	SPINNING
-	} 
+	}
+

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import poo.trabalho.serratec.dao.MenuDAO;
+import poo.trabalho.serratec.model.Aluno;
 
 public class MenuLogin {
 	public static void login() {
@@ -22,23 +23,24 @@ public class MenuLogin {
 			
 			List<String> rsLogin = MenuDAO.autenticaLogin(cpfInserido, senhaInserido);
 			if(rsLogin.get(1).equalsIgnoreCase("Aluno")) {	
+				Aluno alunoLogado = new Aluno(cpfInserido, senhaInserido);
 				boolean retorna = true;
 				while(retorna) {
 					retorna = true;
-					int opcaoInserida = MenuPrincipal.leMenu(rsLogin.get(1), rsLogin.get(0));
-					retorna = MenuPrincipal.menuAluno(opcaoInserida);	
+					int opcaoInserida = MenuPrincipal.leMenu(rsLogin.get(0), rsLogin.get(1), rsLogin.get(2));
+					MenuPrincipal.menuAluno(opcaoInserida, alunoLogado);	
 				}
 			}else if(rsLogin.get(1).equalsIgnoreCase("personal")) {
 				boolean retorna = true;
 				while(retorna) {
-					int opcaoInserida = MenuPrincipal.leMenu(rsLogin.get(1), rsLogin.get(0));
+					int opcaoInserida = MenuPrincipal.leMenu(rsLogin.get(0), rsLogin.get(1), rsLogin.get(2));
 					retorna = MenuPrincipal.menuPersonal(opcaoInserida);
 				}
 			}else if(rsLogin.get(1).equalsIgnoreCase("funcionario")) {
 				boolean retorna = true;
 				while(retorna) {
-				int opcaoInserida = MenuPrincipal.leMenu(rsLogin.get(1), rsLogin.get(0));
-				retorna = MenuPrincipal.menuFuncionario(opcaoInserida);
+				int opcaoInserida = MenuPrincipal.leMenu(rsLogin.get(0), rsLogin.get(1), rsLogin.get(2));
+				MenuPrincipal.menuFuncionario(opcaoInserida);
 				}
 			}
 			sc.close();

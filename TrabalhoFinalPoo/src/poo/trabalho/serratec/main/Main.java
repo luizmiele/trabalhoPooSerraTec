@@ -1,15 +1,13 @@
 package poo.trabalho.serratec.main;
 
-import java.time.LocalDate;
-
-import poo.trabalho.serratec.dao.AlunoDAO;
 import poo.trabalho.serratec.menu.MenuLogin;
-import poo.trabalho.serratec.model.Aluno;
 
 public class Main {
 
 	public static void main(String[] args) {
+		//System.out.println(PlanoDAO.getListaPlanos());
 		
+		//System.out.println(PlanoDAO.getNomePlanoByID(8)); 
 		MenuLogin.login();
 		
 		// PEDIR TODAS AS INFORMACOES INDIVIDUALEMTENTE. anuloLOCAL(nome, cpf,...) 
