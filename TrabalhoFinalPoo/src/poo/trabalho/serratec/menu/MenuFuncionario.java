@@ -4,10 +4,10 @@ import java.io.PrintStream;
 
 public class MenuFuncionario {
 	
-	public static PrintStream exibeMenuFuncionario() {
+	public static PrintStream exibeMenuFuncionario(String nome) {
 		return  System.out.printf("""
 				 --------------------------------------------------------
-				 	                  BEM VINDO
+				 	              BEM VINDO %s
 				 --------------------------------------------------------			
 				 1. Cadastrar novo plano
 				 2. Cadastrar novo aluno
@@ -19,7 +19,7 @@ public class MenuFuncionario {
 				 8. Sair.
 				 
 				 Informe a opção desejada:
-				"""
+				""", nome
 				);
 	}
 }

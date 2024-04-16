@@ -3,29 +3,29 @@ package poo.trabalho.serratec.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import poo.trabalho.serratec.conexao.ConexaoBD;
 import poo.trabalho.serratec.model.Aluno;
 
 public class AlunoDAO {
 	static PreparedStatement ps = null;
-	
-	public void cadastra(Aluno aluno) {
+								 			
+	public static void cadastra(Aluno aluno) {
 
 		String sqlPessoa = "INSERT INTO PESSOA (NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL, SENHA, TIPO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlPessoa);
-			ps.setString(1, aluno.getNome());
+			ps.setString(1, aluno.getNome()); 
 			ps.setString(2, aluno.getCpf());
-			ps.setDate(3, java.sql.Date.valueOf(aluno.getDataNascimento()));
-			ps.setString(4, aluno.getEmail());
-			ps.setString(5, aluno.getTelefone());
+			ps.setObject(3, aluno.getDataNascimento());
+			ps.setString(4, aluno.getTelefone());
+			ps.setString(5, aluno.getEmail());
 			ps.setString(6, aluno.getSenha());
 			ps.setString(7, "Aluno");
 			ps.executeUpdate();
 								
-			
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -35,8 +35,8 @@ public class AlunoDAO {
 		
 		try {
 			PreparedStatement ps = ConexaoBD.getConexao().prepareStatement(sqlAluno);
-			ps.setInt(1, getPlanoID(aluno));
-			ps.setDate(2,java.sql.Date.valueOf(aluno.getDataMatricula())) ;
+			ps.setInt(1, getPlanoID(aluno.getPlanoContratado()));
+			ps.setObject(2,LocalDateTime.now()); // TESTAR PARA VE SE O SETOBJECT VAI FUNCIONAR
 			ps.executeUpdate();
 			
 			ps.close();
@@ -44,7 +44,7 @@ public class AlunoDAO {
 			e.printStackTrace();
 		}	
 	}
-	// TERMINAR AQUI AINDA. PENSAR NA LOGICA PRA PEGAR O ID DO ALUNO
+	
 	public static String getDadosPessoaisAluno(String cpfInserido) {
 		ResultSet rs = null;
 		String stringFormatada = "";
@@ -55,7 +55,6 @@ public class AlunoDAO {
 				+ "JOIN plano ON aluno.planoContratado = plano.planoID\r\n"
 				+ "WHERE pessoa.CPF = ?;\r\n"
 				+ "";
-		
 		
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlDadosPessoaisAluno);
@@ -89,14 +88,14 @@ public class AlunoDAO {
 		return stringFormatada;
 	}
 	
-	public static ResultSet getHorarioAtendimentoPorAluno(Aluno aluno) {
+	public static ResultSet getHorarioAtendimentoPorAluno(String cpf) {
 		
-		String sqlGetHorario = "SELECT * FROM agendamento WHERE alunoID = ? ";
+		String sqlGetHorario = "SELECT * FROM agendamento WHERE CPF = ? ";
 		ResultSet rs;
 		ResultSet horarioAgendamento = null;
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlGetHorario);
-			ps.setInt(1, aluno.getID());
+			ps.setString(1, cpf);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
@@ -111,17 +110,14 @@ public class AlunoDAO {
 		return horarioAgendamento;
 }
 
-	
-	
-	
-	public int getPlanoID(Aluno aluno) {
+	public static int getPlanoID(String nomePlano) {
 		String sqlGetPlanoID = "SELECT planoID FROM PLANO WHERE nomePlano = ?";
 		ResultSet rs;
 		int planoID = 0;
 		
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlGetPlanoID);
-			ps.setString(1, aluno.getPlanoContratado());
+			ps.setString(1, nomePlano);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
@@ -138,7 +134,5 @@ public class AlunoDAO {
 	@Override
 	public String toString() {
 		return super.toString();
-}
-	
-	
+}	
 }

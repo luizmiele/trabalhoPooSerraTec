@@ -4,10 +4,10 @@ import java.io.PrintStream;
 
 public class MenuPersonal {
 
-	public static PrintStream exibeMenuPersonal() {
+	public static PrintStream exibeMenuPersonal(String nome) {
 		return  System.out.printf("""
 				 --------------------------------------------------------
-				 	  	                  BEM VINDO
+				  				BEM VINDO %s
 				 --------------------------------------------------------			
 				 1. Visualizar agenda de atendimentos.
 				 2. Registrar avaliações físicas dos alunos.
@@ -15,7 +15,7 @@ public class MenuPersonal {
 				 4. Sair.
 
 				 Informe a opção desejada:
-				"""
+				""", nome
 				);
 	}
 }
