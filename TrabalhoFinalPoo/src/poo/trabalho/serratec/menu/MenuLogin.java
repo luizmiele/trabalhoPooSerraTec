@@ -5,11 +5,14 @@ import java.util.Scanner;
 
 import poo.trabalho.serratec.dao.MenuDAO;
 import poo.trabalho.serratec.model.Aluno;
+import poo.trabalho.serratec.model.Funcionario;
+import poo.trabalho.serratec.model.Personal;
 
 public class MenuLogin {
 	public static void login() {
 		Scanner sc = new Scanner(System.in);
-		while(true) {
+		boolean retorna = false;
+		while(!retorna) {
 			System.out.println("""
                                                ------------------------------------------------------
                                                |              Portugol Health & Fitness             |
@@ -24,26 +27,24 @@ public class MenuLogin {
 			List<String> rsLogin = MenuDAO.autenticaLogin(cpfInserido, senhaInserido);
 			if(rsLogin.get(1).equalsIgnoreCase("Aluno")) {	
 				Aluno alunoLogado = new Aluno(cpfInserido, senhaInserido);
-				boolean retorna = true;
+				retorna = true;
 				while(retorna) {
-					retorna = true;
-					int opcaoInserida = MenuPrincipal.leMenu(rsLogin.get(0), rsLogin.get(1), rsLogin.get(2));
-					MenuPrincipal.menuAluno(opcaoInserida, alunoLogado);	
+					retorna = MenuPrincipal.menuAluno(alunoLogado);	
 				}
 			}else if(rsLogin.get(1).equalsIgnoreCase("personal")) {
-				boolean retorna = true;
+				Personal personalLogado = new Personal(cpfInserido, senhaInserido);
+				retorna = true;
 				while(retorna) {
-					int opcaoInserida = MenuPrincipal.leMenu(rsLogin.get(0), rsLogin.get(1), rsLogin.get(2));
-					retorna = MenuPrincipal.menuPersonal(opcaoInserida);
+					retorna = MenuPrincipal.menuPersonal(personalLogado);
 				}
 			}else if(rsLogin.get(1).equalsIgnoreCase("funcionario")) {
-				boolean retorna = true;
+				Funcionario funcionarioLogado = new Funcionario(cpfInserido, senhaInserido);
+				retorna = true;
 				while(retorna) {
-				int opcaoInserida = MenuPrincipal.leMenu(rsLogin.get(0), rsLogin.get(1), rsLogin.get(2));
+				int opcaoInserida = MenuPrincipal.menuFuncionario(funcionarioLogado);
 				MenuPrincipal.menuFuncionario(opcaoInserida);
 				}
 			}
-			sc.close();
 		}
 	}
 

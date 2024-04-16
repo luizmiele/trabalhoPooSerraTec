@@ -4,11 +4,12 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 import poo.trabalho.serratec.dao.AlunoDAO;
-import poo.trabalho.serratec.dao.FuncionarioDAO;
+import poo.trabalho.serratec.dao.PersonalDAO;
 import poo.trabalho.serratec.dao.PlanoDAO;
 import poo.trabalho.serratec.model.Aluno;
-import poo.trabalho.serratec.model.Cargo;
+import poo.trabalho.serratec.model.Especialidade;
 import poo.trabalho.serratec.model.Funcionario;
+import poo.trabalho.serratec.model.Personal;
 import poo.trabalho.serratec.model.Plano;
 import poo.trabalho.serratec.service.MenuService;
 
@@ -58,13 +59,14 @@ public class MenuPrincipal {
 	return opcao;
 	}
 	
-	public static void menuFuncionario(int opcaoMenu) { //TESTANDO OS 3 MENUS SEM RETURN BOOLEAN
+	public static boolean menuFuncionario(Funcionario funcionario) { 
 		Scanner s = new Scanner(System.in);
 	    int opcao = -1;
 	    boolean retorna = true;
 	    
 	    while (opcao != 8) {
-	    	  opcao = opcaoMenu;
+	    	
+	    opcao = MenuPrincipal.leMenu(funcionario.getNome(), funcionario.getTipo(), funcionario.getSenha());
 	        
 	        if (opcao == 1) {
 	            
@@ -86,9 +88,10 @@ public class MenuPrincipal {
 	            String telefone = MenuService.leTelefone();
 	            String email = MenuService.leEmail();
 	            String senha = MenuService.leSenha();
-	            String nomePlano = MenuService.leNomePlano();
+	            String tipo = "Aluno";
+	            Plano plano = PlanoDAO.getPlanoByID();
 	            
-	            Aluno aluno = new Aluno(nome,cpf,dataNascimento,telefone,email,senha,nomePlano, nomePlano, LocalDate.now());
+	            Aluno aluno = new Aluno(nome,cpf,dataNascimento,telefone,email,senha,tipo, plano, LocalDate.now());
 	            AlunoDAO.cadastra(aluno);
 	            break;
 	        } else if (opcao == 3) {
@@ -101,10 +104,12 @@ public class MenuPrincipal {
 	            String email = MenuService.leEmail();
 	            String senha = MenuService.leSenha();
 	            String tipo = "Funcionario";
-	            Cargo cargo = MenuService.leCargo();
+	            Especialidade especialidade = MenuService.leEspecialidade();
+	            String cref = MenuService.leCref();
+	            String horarioAgendamento = MenuService.leHorarioAtendimento();
 	            
-	            Funcionario funcionario = new Funcionario(nome,cpf,dataNascimento,telefone,email,senha,tipo, cargo);
-	            FuncionarioDAO.cadastra(funcionario);
+	            Personal personal = new Personal(nome,cpf,dataNascimento,telefone,email,senha,tipo, especialidade, cref, horarioAgendamento);
+	            PersonalDAO.cadastra(personal);
 	        } else if (opcao == 4) {
 	        	System.out.println("\nEmitindo relatorio de planos...\n");
 	        	System.out.println(PlanoDAO.getAllPlanos()); 
@@ -116,21 +121,24 @@ public class MenuPrincipal {
 	        } else if (opcao == 7) {
 	            System.out.println("\nEmitindo relação de avaliações físicas por período...\n");
 	        } else if (opcao == 8) {
-	        	retorna = false;
+	        	break;
 	        } else{
 	            System.out.println("\nOpção inválida! Tente novamente.\n");
 	        }
 	    }
+	    return retorna;
 	}
 	
-	public static void menuAluno(int opcaoMenu, Aluno aluno) {
+	public static boolean menuAluno(Aluno aluno) {
+		Scanner s = new Scanner(System.in);
 	    int opcao = -1;
+	    boolean retorna = false;
 	    
 	    while (opcao != 6) {
-	        opcao = opcaoMenu;
+	    	opcao = leMenu(aluno.getNome(), aluno.getTipo(), aluno.getSenha());
 	        if (opcao == 1) {
 	        	System.out.println(AlunoDAO.getDadosPessoaisAluno(aluno.getCpf()));
-	            break;
+	            
 	        } else if (opcao == 2) {
 	        	
 	            System.out.println("\nSolicitando agendamento de horário com personal trainer...\n");
@@ -146,19 +154,20 @@ public class MenuPrincipal {
 	            break;
 	        } else if (opcao == 6) {
 	        	System.out.println("\nPrograma Finalizado.\n");
-	        	return;
+	        	return retorna;
 	        } else{
 	            System.out.println("\nOpção inválida! Tente novamente.\n");
 	        }
 	    }
+	    return retorna;
 	}
 	
-	public static boolean menuPersonal(int opcaoMenu) {
+	public static boolean menuPersonal(Personal personalLogado) {
 	    int opcao = -1;
 	    boolean retorna = true;
 	    
 	    while (opcao != 4) {
-	        opcao = opcaoMenu;
+	    	opcao = MenuPrincipal.leMenu(personalLogado.getNome(), personalLogado.getTipo(), personalLogado.getSenha());
 	        
 	        if (opcao == 1) {
 	            System.out.println("\nVisualizando agenda de atendimentos...\n");

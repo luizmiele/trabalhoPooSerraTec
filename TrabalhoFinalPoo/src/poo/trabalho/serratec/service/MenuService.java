@@ -6,16 +6,10 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import poo.trabalho.serratec.dao.PlanoDAO;
 import poo.trabalho.serratec.model.Cargo;
 import poo.trabalho.serratec.model.Especialidade;
 
 public class MenuService {
-	
-	//FAZER METODO DE NOMEPLANO String nomePlano = "";ok
-    //FAZER METODO DE DESCRICAO String descricao = MenuService.leDescricao();ok
-    //FAZER METODO DE DURACAO int duracao = 30;
-    //FAZER METODO DE VALOR double valor = 0.0; ok
 
 	public static double leValor () {
 		Scanner s = new Scanner(System.in); 
@@ -72,7 +66,7 @@ public class MenuService {
            System.out.println("Duração do plano invalido"); 
 		}
 	}
-	
+	/*
 	public static String leOpcaoPlano () {
 		Scanner s = new Scanner(System.in);
 		String nomePlano = "";
@@ -83,7 +77,7 @@ public class MenuService {
 
 		return nomePlano;
 	}
-	
+	*/
 	public static String leDescricao() {
 		Scanner s = new Scanner(System.in);
 		String descricao = "";
@@ -100,6 +94,9 @@ public class MenuService {
 		}
 		return descricao;
 	}
+	
+	
+	
 	public static Especialidade leEspecialidade() {
 		Scanner s = new Scanner(System.in);
 		int opcao = -1;
@@ -188,22 +185,38 @@ public class MenuService {
 	public static String leCpf() {
     	Scanner scanner = new Scanner(System.in);
     	String cpf = "";
-    	String cpfNumerico = "";
-    	boolean cpfCorreto = false;
-    	while(!cpfCorreto) {
+    	String cpfFormatado = "";
+    	while(true) {
 	        System.out.print("Digite o CPF: ");
 	        cpf = scanner.nextLine();
 	        
-	        cpfNumerico = cpf.replaceAll("[^0-9]", "");
+	        cpfFormatado = cpf.replaceAll("[^0-9]", "");
 
-	        if (cpfNumerico.length() != 11) {
+	        if (cpfFormatado.length() != 11) {
 	        	System.out.println("CPF INVALIDO! Digite novamente!");
 	        }else {
 	        	break;
 	        }
     	}
-    	return cpfNumerico;
+    	return cpfFormatado;
     }
+	
+	public static String leHorarioAtendimento() {
+		Scanner s = new Scanner(System.in);
+		String descricao = "";
+		boolean descricaoOK = false;
+		
+		while(!descricaoOK) {
+			System.out.println("Informe o Horario de atendimento ");
+			descricao = s.nextLine();
+			if(descricao.isBlank() || descricao.length() > 200) {
+				System.out.println("Horario de atendimento invalido!");
+			}else {
+				break;
+			}
+		}
+		return descricao;
+	}
 	
 	public static String leCref() {
 		Scanner s = new Scanner(System.in);
@@ -218,7 +231,9 @@ public class MenuService {
             
             if(matcher.matches()) {
             	 return "CREF-" + numCref;
-            }   
+            } else {
+            	System.out.println("Formato invalido!");
+            }
 		}
 	}
 	

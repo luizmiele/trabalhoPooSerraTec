@@ -1,26 +1,27 @@
 package poo.trabalho.serratec.dao;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import poo.trabalho.serratec.conexao.ConexaoBD;
-import poo.trabalho.serratec.model.Especialidade;
+import poo.trabalho.serratec.model.Personal;
 
 public class PersonalDAO {
 static PreparedStatement ps = null;
 	
-	public static void cadastra(String nome, String cpf, String dataNascimento, String telefone, String email, String senha, Especialidade especialidade, String cref, String horarioAtendimento) {
+	public static void cadastra(Personal personal) {
 		
 		String sqlPessoa = "INSERT INTO PESSOA (NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL, SENHA) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlPessoa);
-			ps.setString(1, nome);
-			ps.setString(2, cpf);
-			ps.setString(3, dataNascimento);
-			ps.setString(4, telefone);
-			ps.setString(5, email);
-			ps.setString(6, senha);
+			ps.setString(1, personal.getNome());
+			ps.setString(2, personal.getCpf());
+			ps.setDate(3, Date.valueOf(personal.getDataNascimento()));
+			ps.setString(4, personal.getTelefone());
+			ps.setString(5, personal.getEmail());
+			ps.setString(6, personal.getSenha());
 			ps.setString(7, "Personal");
 			ps.executeUpdate(); 
 			
@@ -33,9 +34,9 @@ static PreparedStatement ps = null;
 		
 		try {
 			ps = ConexaoBD.getConexao().prepareStatement(sqlpersonal);
-			ps.setObject(1, especialidade);
-			ps.setString(2, cref);
-			ps.setString(3, horarioAtendimento);
+			ps.setObject(1, personal.getEspecialidade());
+			ps.setString(2, personal.getCref());
+			ps.setString(3, personal.getHorarioAtendimento());
 			ps.executeUpdate();
 			
 			ps.close();

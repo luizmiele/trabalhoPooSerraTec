@@ -94,31 +94,42 @@ public class PlanoDAO {
 		return sb;
 	}
 	
-	public static String getNomePlanoByID(int opcao) {
+	public static Plano getPlanoByID() {
 		Scanner s = new Scanner(System.in);
 		ResultSet rs;
-		String nome = "";
 		boolean encontrado = false;
-		String sqlGetNomePlano = "SELECT nomePlano FROM PLANO WHERE PLANOID = ?";
+		int opcao = 0;
+		Plano planoAluno = null;
 		
-		try {
-			while(!encontrado) {
-			ps = ConexaoBD.getConexao().prepareStatement(sqlGetNomePlano);
-			ps.setInt(1, opcao);
-			rs = ps.executeQuery();
-
-				if(rs.next()) {
-					nome = rs.getString("nomePlano");
-					return nome;
-				} else {
-					System.out.println("Plano não encontrado! Digite novamente");
-					opcao = s.nextInt();
-				}
-			} 
-		}catch (SQLException e) {
-			e.printStackTrace();
+		while(true) {
+			System.out.println(getListaNomesPlanos());
+			opcao = s.nextInt();
+		
+			String sqlGetNomePlano = "SELECT * FROM PLANO WHERE PLANOID = ?";
+			
+			try {
+				while(!encontrado) {
+					ps = ConexaoBD.getConexao().prepareStatement(sqlGetNomePlano);
+					ps.setInt(1, opcao);
+					rs = ps.executeQuery();
+	
+					if(rs.next()) {
+						String nome = rs.getString("nomePlano");
+						int duracao = rs.getInt("duracao");
+						double valor = rs.getDouble("valor");
+						String descricao = rs.getNString("descricao");
+						
+						planoAluno = new Plano(nome, duracao, valor, descricao);
+						return planoAluno;
+					} else {
+						System.out.println("Plano não encontrado!");
+						break;
+					}
+				} 
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		return nome;
 	}
 	
 	public static StringBuilder getAllPlanos() {
@@ -150,7 +161,6 @@ public class PlanoDAO {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return todosPlanos; 
 	}
 }
