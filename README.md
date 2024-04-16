@@ -52,6 +52,69 @@ Decidimos utilizar um banco de dados para registrar as informações do nosso pr
 Segue o modelo e população do banco de dados:
 
 ```
+CREATE TABLE pessoa (
+    pessoaID SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    CPF VARCHAR(11) UNIQUE,
+    dataNascimento DATE,
+    telefone VARCHAR(20),
+    email VARCHAR(50),
+    senha VARCHAR(100),
+    tipo VARCHAR(20)
+); 
+
+create table plano (
+	planoID SERIAL primary key,
+	nomePlano VARCHAR(50),
+	duracao int,
+	valor float,
+	descricao VARCHAR(200)
+);
+
+create table funcionario (
+	funcionarioID int primary key,
+	cargo VARCHAR(50),
+	Foreign key (funcionarioID) references pessoa(pessoaID)
+);
+
+create table personal (
+	personalID int primary key,
+	especialidade VARCHAR(100),
+	cref VARCHAR(50),
+	horarioAgendamentos text,
+	Foreign key (personalID) references pessoa(pessoaID)
+);
+
+create table agendamento (
+	agendamentoID SERIAL primary key,
+	data date,
+	horario Time,
+	personalID int,
+	alunoID int,
+	foreign key (personalID) references personal(personalID),
+	foreign key (alunoID) references aluno(alunoID)
+);
+
+create table aluno (
+	alunoID int primary key,
+	planoContratado int,
+	dataMatricula Date,
+	Foreign key (alunoID) references pessoa(pessoaID),
+	Foreign key (planoContratado) references plano(planoID)
+)
+
+create table Avaliacao (
+avaliacaoID SERIAL primary key,
+alunoID int,
+personalID int,
+data Date not null,
+descricao VARCHAR(200) not null,
+Foreign key (alunoID) references aluno(alunoID),
+Foreign key (personalID) references personal(personalID) 
+);
+```
+
+```
 
 ```
 
