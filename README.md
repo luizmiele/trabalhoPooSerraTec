@@ -52,7 +52,9 @@ Decidimos utilizar um banco de dados para registrar as informações do nosso pr
 Segue o modelo e população do banco de dados:
 
 ```
-CREATE TABLE pessoa (
+create database trabalhofinalpoogrupo4;
+
+create table pessoa (
     pessoaID SERIAL PRIMARY KEY,
     nome VARCHAR(100),
     CPF VARCHAR(11) UNIQUE,
@@ -153,6 +155,7 @@ values
 ('Pedro Cardoso', '52175509532', '1998-10-26', '11987654344', 'pedro2@email.com', '12345', 'aluno'),
 ('Bruna Costa', '23866731701', '1999-12-15', '11987654345', 'bruna@email.com', '12345', 'aluno');
 
+
 INSERT INTO plano (nomePlano, duracao, valor, descricao)
 VALUES
     ('GOLD', 30, 200.00, 'Apenas Musculação'),
@@ -174,6 +177,7 @@ VALUES
     (3, 'Recepcionista'),
     (4, 'Gerente'),
     (5, 'ADM');
+
    
 INSERT INTO Aluno (alunoID, planoContratado, datamatricula)
 VALUES
@@ -201,7 +205,8 @@ VALUES
     (32, 1, CURRENT_DATE),
     (33, 2, CURRENT_DATE),
     (34, 3, CURRENT_DATE),
-    (35, 2, CURRENT_DATE); 
+    (35, 2, CURRENT_DATE);
+   
 
 insert into avaliacao (alunoID,personalID,data,descricao)
 values (12, 6,'2024-10-01','Perdeu 3kg desde a última avaliação!');
@@ -220,6 +225,7 @@ values (11, 6,'2024-10-07','Perdeu 5 kg desde a última avaliação!');
 
 insert into avaliacao (alunoID,personalID,data,descricao)
 values (13, 10,'2024-10-12','Está com 88kg, precisando perder 8kg para peso ideal');
+
 
 INSERT INTO agendamento (data, horario, personalID, alunoID)
 VALUES 
