@@ -1,9 +1,9 @@
 # Programação Orientada a Objeto - Grupo 4
 ## Alunos:
 
-César Guerra Peixe, 
+César Guerra Peixe Muller Alves, 
 
-Luiz Miele,
+Luiz Francisco Miele,
 
 Lucas Amorim Rodrigues,
 
