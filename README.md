@@ -7,7 +7,7 @@ Luiz Miele,
 
 Lucas Amorim Rodrigues,
 
-Ismael Jagne,
+Ismael Antonio carvalho jagne,
 
 Dionatan de Andrade Cardoso.
 
