@@ -8,6 +8,19 @@ public class Aluno extends Pessoa{
 	private LocalDate dataMatricula;
 	private List<String> avaliacoesFisicas;
 	
+	
+	public Aluno() {
+		super();
+	}
+	public Aluno(int pessoaID, String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha, String tipo,
+			Plano planoContratado, LocalDate dataMatricula) {
+		super(pessoaID, nome, cpf, dataNascimento, telefone, email, senha, tipo);
+		this.planoContratado = planoContratado;
+		this.dataMatricula = dataMatricula;
+	}
+	
+	
+						
 	public Aluno(String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha, String tipo,
 			Plano planoContratado, LocalDate dataMatricula) {
 		super(nome, cpf, dataNascimento, telefone, email, senha, tipo);

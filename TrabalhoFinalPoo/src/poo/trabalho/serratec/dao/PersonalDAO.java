@@ -71,14 +71,14 @@ static PreparedStatement ps = null;
 				stringFormatada = String.format(
 				"""
 			|			
-			|	ID do Personal: %d             
-			|	Nome : %s					 
-			|	Data Nascimento: %s			 
-			|	Telefone: %s				 
-			|	Email: %s					 
-			|	Tipo: %s					 
-			|	Especialidade: %s            
-			|	Horário de atendimento: %s   
+			|	● ID do Personal: %d             
+			|	● Nome : %s					 
+			|	● Data Nascimento: %s			 
+			|	● Telefone: %s				 
+			|	● Email: %s					 
+			|	● Tipo: %s					 
+			|	● Especialidade: %s            
+			|	● Horário de atendimento: %s   
 			|___________________________________________________________________________
 				""", personalID, nome, dataNascimento, telefone, email, tipo, especialidade, horarioAgendamentos);
 				todosPersonal.append(stringFormatada);

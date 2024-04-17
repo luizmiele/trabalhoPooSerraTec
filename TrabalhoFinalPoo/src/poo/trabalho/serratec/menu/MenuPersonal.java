@@ -7,7 +7,7 @@ public class MenuPersonal {
 	public static PrintStream exibeMenuPersonal(String nome) {
 		return  System.out.printf("""
 				 --------------------------------------------------------
-				  				BEM VINDO %s
+				  					BEM VINDO 
 				 --------------------------------------------------------			
 				 1. Visualizar agenda de atendimentos.
 				 2. Registrar avaliações físicas dos alunos.
@@ -15,7 +15,7 @@ public class MenuPersonal {
 				 4. Sair.
 
 				 Informe a opção desejada:
-				""", nome
+				"""
 				);
 	}
 }

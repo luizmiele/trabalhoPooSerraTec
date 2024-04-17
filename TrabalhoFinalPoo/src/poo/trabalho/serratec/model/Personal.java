@@ -6,6 +6,15 @@ public class Personal extends Pessoa{
 	private Especialidade especialidade;
 	private String cref;
 	private String horarioAtendimento;
+
+	
+	public Personal(int pessoaID, String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha, String tipo, 
+			Especialidade especialidade, String cref, String horarioAtendimento) {
+		super(pessoaID, nome, cpf, dataNascimento, telefone, email, senha, tipo);
+		this.especialidade = especialidade;
+		this.cref = cref;
+		this.horarioAtendimento = horarioAtendimento;
+	}
 	
 	public Personal(String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha, String tipo, 
 			Especialidade especialidade, String cref, String horarioAtendimento) {

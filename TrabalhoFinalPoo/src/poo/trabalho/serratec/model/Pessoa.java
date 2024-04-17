@@ -12,11 +12,24 @@ public abstract class Pessoa {
 	private String senha;
 	private String tipo;
 	
+	public Pessoa () {
+		
+	}
 	
 	public Pessoa (String cpf, String tipo, String senha) {
 		this.cpf = cpf;
 		this.tipo = tipo;
 		this.senha = senha;
+	}
+	public Pessoa(int pessoaID, String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha, String tipo) {
+		this.pessoaID = pessoaID;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+		this.telefone = telefone;
+		this.email = email;
+		this.senha = senha;
+		this.tipo = tipo;
 	}
 	public Pessoa(String nome, String cpf, LocalDate dataNascimento, String telefone, String email, String senha, String tipo) {
 		this.nome = nome;

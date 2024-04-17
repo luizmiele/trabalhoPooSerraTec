@@ -8,6 +8,7 @@ public class Agendamento {
 	private LocalTime horario;
 	private int personalID;
 	private int alunoID;
+	private int agendamentoID;
 	
 	public Agendamento(LocalDate data, LocalTime horario, int personalID, int alunoID) {
 		this.data = data;
@@ -15,6 +16,7 @@ public class Agendamento {
 		this.personalID = personalID;
 		this.alunoID = alunoID;
 	}
+	
 	
 	public LocalDate getData() {
 		return data;
@@ -29,6 +31,11 @@ public class Agendamento {
 		return alunoID;
 	}
 	
+	public int getAgendamentoID() {
+		return agendamentoID;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Agendamento [data=" + data + ", horario=" + horario + ", personalID=" + personalID + ", alunoID="

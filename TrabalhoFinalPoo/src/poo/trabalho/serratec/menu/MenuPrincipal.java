@@ -3,7 +3,9 @@ package poo.trabalho.serratec.menu;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import poo.trabalho.serratec.dao.AgendamentoDAO;
 import poo.trabalho.serratec.dao.AlunoDAO;
+import poo.trabalho.serratec.dao.AvaliacaoDAO;
 import poo.trabalho.serratec.dao.FuncionarioDAO;
 import poo.trabalho.serratec.dao.PersonalDAO;
 import poo.trabalho.serratec.dao.PlanoDAO;
@@ -60,14 +62,14 @@ public class MenuPrincipal {
 	return opcao;
 	}
 	
-	public static boolean menuFuncionario(Funcionario funcionario) { 
+	public static boolean menuFuncionario(Funcionario funcionarioLogado) { 
 		Scanner s = new Scanner(System.in);
 	    int opcao = -1;
 	    boolean retorna = true;
 	    
 	    while (opcao != 8) {
 	    	
-	    opcao = MenuPrincipal.leMenu(funcionario.getNome(), funcionario.getTipo(), funcionario.getSenha());
+	    opcao = MenuPrincipal.leMenu(funcionarioLogado.getNome(), funcionarioLogado.getTipo(), funcionarioLogado.getSenha());
 	        
 	        if (opcao == 1) {
 	            
@@ -90,7 +92,7 @@ public class MenuPrincipal {
 	            String email = MenuService.leEmail();
 	            String senha = MenuService.leSenha();
 	            String tipo = "Aluno";
-	            Plano plano = PlanoDAO.getPlanoByID();
+	            Plano plano = PlanoDAO.getPlanoPedeID();
 	            
 	            Aluno aluno = new Aluno(nome,cpf,dataNascimento,telefone,email,senha,tipo, plano, LocalDate.now());
 	            AlunoDAO.cadastra(aluno);
@@ -123,6 +125,7 @@ public class MenuPrincipal {
 	            System.out.println(PersonalDAO.getTodosPersonal());
 	        } else if (opcao == 7) {
 	            System.out.println("\nEmitindo relação de avaliações físicas por período...\n");
+	            
 	        } else if (opcao == 8) {
 	        	return retorna;
 	        } else{
@@ -132,29 +135,28 @@ public class MenuPrincipal {
 	    return retorna;
 	}
 	
-	public static boolean menuAluno(Aluno aluno) {
+	public static boolean menuAluno(Aluno alunoLogado) {
 		Scanner s = new Scanner(System.in);
 	    int opcao = -1;
 	    boolean retorna = false;
 	    
 	    while (opcao != 6) {
-	    	opcao = leMenu(aluno.getNome(), aluno.getTipo(), aluno.getSenha());
+	    	opcao = leMenu(alunoLogado.getNome(), alunoLogado.getTipo(), alunoLogado.getCpf());
 	        if (opcao == 1) {
-	        	System.out.println(AlunoDAO.getDadosPessoaisAluno(aluno.getCpf()));
-	            
+	        	System.out.println(AlunoDAO.getDadosPessoaisAluno(alunoLogado));
 	        } else if (opcao == 2) {
-	        	
 	            System.out.println("\nSolicitando agendamento de horário com personal trainer...\n");
-	            break;
+	            AgendamentoDAO.agendamento(alunoLogado);
 	        } else if (opcao == 3) {
 	            System.out.println("\nVisualizando histórico de agendamentos...\n");
-	            break;
+	           System.out.println(AgendamentoDAO.historicoAgendamentoAluno(alunoLogado)); 
 	        } else if (opcao == 4) {
 	            System.out.println("\nCancelando agendamento...\n");
-	            break;
+	            AgendamentoDAO.cancelaAgendamento();
 	        } else if (opcao == 5) {
 	            System.out.println("\nVisualizando avaliações físicas...\n");
-	            break;
+	            String cpf = s.nextLine();
+	            AvaliacaoDAO.exibirAvaliacao(cpf);
 	        } else if (opcao == 6) {
 	        	System.out.println("\nPrograma Finalizado.\n");
 	        	return retorna;
@@ -174,10 +176,18 @@ public class MenuPrincipal {
 	        
 	        if (opcao == 1) {
 	            System.out.println("\nVisualizando agenda de atendimentos...\n");
+	            System.out.println(AgendamentoDAO.agendaAtendimentosByID(personalLogado)); 
 	        } else if (opcao == 2) {
 	            System.out.println("\nRegistrando avaliações físicas dos alunos...\n");
+	            
+	            AvaliacaoDAO.cadastrarAvaliacao(personalLogado);
+	            
 	        } else if (opcao == 3) {
 	            System.out.println("\nVisualizando lista de avaliações realizadas...\n");
+	            int mesInicio = 0;
+	            int mesFinal = 0;
+	            AvaliacaoDAO.exibirAvaliacaoPeriodo(mesInicio,mesFinal);
+	            
 	        } else if (opcao == 4) {
 	        	retorna = false;
 	        	System.out.println("\nFinalizando Programa!\n");

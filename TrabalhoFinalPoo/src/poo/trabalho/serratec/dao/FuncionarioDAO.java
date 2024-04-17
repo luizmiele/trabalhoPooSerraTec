@@ -68,12 +68,12 @@ public class FuncionarioDAO {
 				String cargo = rs.getString("cargo");
 				
 				stringFormatada = String.format("""
-						Nome: %s
-						CPF:  %s
-						DataNascimento: %s
-						Telefone: %s
-						Email: %s
-						Cargo: %s
+						● Nome: %s
+						● CPF:  %s
+						● DataNascimento: %s
+						● Telefone: %s
+						● Email: %s
+						● Cargo: %s
 						""", nome,cpf,dataNascimento,telefone,email,cargo);
 				
 			} else {
@@ -108,12 +108,12 @@ public class FuncionarioDAO {
 				stringFormatada = String.format(
 				"""
 			|			
-			|	ID do Funcionario: %d             
-			|	Nome : %s					 
-			|	Data Nascimento: %s			 
-			|	Telefone: %s				 
-			|	Email: %s					 				 
-			|	Cargo: %s   
+			|	● ID do Funcionario: %d             
+			|	● Nome : %s					 
+			|	● Data Nascimento: %s			 
+			|	● Telefone: %s				 
+			|	● Email: %s					 				 
+			|	● Cargo: %s   
 			|___________________________________________________________________________	
 				""", funcionarioID, nome, dataNascimento, telefone, email, cargo);
 				todosFuncionarios.append(stringFormatada);
