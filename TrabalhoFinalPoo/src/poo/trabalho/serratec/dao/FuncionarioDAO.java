@@ -1,11 +1,15 @@
 package poo.trabalho.serratec.dao;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import poo.trabalho.serratec.conexao.ConexaoBD;
+import poo.trabalho.serratec.model.Cargo;
 import poo.trabalho.serratec.model.Funcionario;
+import poo.trabalho.serratec.model.Plano;
 
 public class FuncionarioDAO {
 	
@@ -42,6 +46,36 @@ public class FuncionarioDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
+	}
+	
+	public static Funcionario funcionarioLogado(String cpf, String senha) {
+		ResultSet rs = null;
+		Funcionario funcionarioLogado = new Funcionario();
+		String sqlDadosPessoaisAluno = "SELECT pessoa.*, funcionario.* " +
+			    "FROM pessoa " +
+			    "JOIN funcionario ON pessoa.pessoaID = funcionario.funcionarioID " +
+			    "WHERE pessoa.cpf = ?";
+		try {
+			ps = ConexaoBD.getConexao().prepareStatement(sqlDadosPessoaisAluno);
+			ps.setString(1,cpf);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				int funcionarioID = rs.getInt("funcionarioID");
+				String nome = rs.getString("nome");
+				String dataNascimentoStr = rs.getString("datanascimento");
+				LocalDate dataNascimento = Date.valueOf(dataNascimentoStr).toLocalDate();
+				String telefone =rs.getString("telefone");
+				String email =rs.getString("email");
+				String tipo = "Funcionario";
+				Cargo cargo = (Cargo) rs.getObject("cargo");
+				
+				funcionarioLogado = new Funcionario(funcionarioID, nome, cpf, dataNascimento, telefone, email, senha, tipo,cargo);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return funcionarioLogado;
 	}
 	
 	public static String getDadosPessoaisFuncionario(String cpfInserido) {

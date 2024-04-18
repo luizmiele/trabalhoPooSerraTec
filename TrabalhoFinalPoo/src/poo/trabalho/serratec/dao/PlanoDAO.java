@@ -50,11 +50,11 @@ public class PlanoDAO {
 					String descricao =rs.getString("descricao");
 					
 					stringFormatada = String.format("""
-							Nome do Plano: %s
-							Duração:  %d
-							Valor: %.2f
-							Descricao: %s
-							
+							|Nome do Plano: %s
+							|Duração:  %d
+							|Valor: %.2f
+							|Descricao: %s
+							|__________________________________________
 							""", nomePlano,duracao,valor,descricao);
 					
 					sb.append(stringFormatada);
@@ -183,11 +183,11 @@ public class PlanoDAO {
 				
 				stringFormatada = String.format(
 				"""
-						ID do plano: %d
-						Nome do plano: %s
-						Valor: R$ %.2f
-						Descrição: %s
-			___________________________________________________________		
+			|	ID do plano: %d
+			|	Nome do plano: %s
+			|	Valor: R$ %.2f
+			|	Descrição: %s
+			|___________________________________________________________		
 				""", planoID, nomePlano, valor, descricao);
 				todosPlanos.append(stringFormatada);
 			} 

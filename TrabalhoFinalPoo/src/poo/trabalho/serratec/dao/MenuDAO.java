@@ -17,7 +17,6 @@ public class MenuDAO {
 		List<String> alunoLocal = new ArrayList<>();
 		
 			String sqlNomeSenha = "SELECT NOME, TIPO, CPF FROM PESSOA WHERE CPF = ? AND SENHA = ? ";
-		
 			try {
 				ps = ConexaoBD.getConexao().prepareStatement(sqlNomeSenha);
 				ps.setString(1, cpf);
@@ -46,6 +45,6 @@ public class MenuDAO {
 				e.printStackTrace();
 				return null;
 			}
-			return alunoLocal;
+		return alunoLocal;
 	}
 }

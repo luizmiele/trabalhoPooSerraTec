@@ -13,15 +13,18 @@ import poo.trabalho.serratec.model.Aluno;
 import poo.trabalho.serratec.model.Especialidade;
 import poo.trabalho.serratec.model.Funcionario;
 import poo.trabalho.serratec.model.Personal;
+import poo.trabalho.serratec.model.Pessoa;
 import poo.trabalho.serratec.model.Plano;
 import poo.trabalho.serratec.service.MenuService;
 
 public class MenuPrincipal {
 	
-	public static int leMenu(String nome, String tipo,String cpf) {
+	public static int leMenuAluno(Pessoa pessoa) {
 		Scanner  s = new Scanner(System.in);
 		int opcao = 0;
 		boolean validador = true;
+		String tipo = pessoa.getTipo();
+		String nome = pessoa.getNome();
 		
 		do {			
 			if(tipo.equalsIgnoreCase("aluno")) {
@@ -127,7 +130,7 @@ public class MenuPrincipal {
 	            System.out.println("\nEmitindo relação de avaliações físicas por período...\n");
 	            
 	        } else if (opcao == 8) {
-	        	return retorna;
+	        	break;
 	        } else{
 	            System.out.println("\nOpção inválida! Tente novamente.\n");
 	        }
@@ -141,7 +144,7 @@ public class MenuPrincipal {
 	    boolean retorna = false;
 	    
 	    while (opcao != 6) {
-	    	opcao = leMenu(alunoLogado.getNome(), alunoLogado.getTipo(), alunoLogado.getCpf());
+	    	opcao = leMenuAluno(alunoLogado);
 	        if (opcao == 1) {
 	        	System.out.println(AlunoDAO.getDadosPessoaisAluno(alunoLogado));
 	        } else if (opcao == 2) {
@@ -154,9 +157,11 @@ public class MenuPrincipal {
 	            System.out.println("\nCancelando agendamento...\n");
 	            AgendamentoDAO.cancelaAgendamento();
 	        } else if (opcao == 5) {
-	            System.out.println("\nVisualizando avaliações físicas...\n");
-	            String cpf = s.nextLine();
-	            AvaliacaoDAO.exibirAvaliacao(cpf);
+	            System.out.println("CPF Aluno:");
+	            String cpfAluno = s.nextLine();
+	            System.out.println("CPF Personal");
+	            String cpfPersonal = s.nextLine();
+	            System.out.println(AvaliacaoDAO.exibirAvaliacao(cpfAluno, cpfPersonal));
 	        } else if (opcao == 6) {
 	        	System.out.println("\nPrograma Finalizado.\n");
 	        	return retorna;
@@ -168,6 +173,7 @@ public class MenuPrincipal {
 	}
 	
 	public static boolean menuPersonal(Personal personalLogado) {
+		Scanner s = new Scanner(System.in);
 	    int opcao = -1;
 	    boolean retorna = true;
 	    
@@ -183,10 +189,9 @@ public class MenuPrincipal {
 	            AvaliacaoDAO.cadastrarAvaliacao(personalLogado);
 	            
 	        } else if (opcao == 3) {
-	            System.out.println("\nVisualizando lista de avaliações realizadas...\n");
-	            int mesInicio = 0;
-	            int mesFinal = 0;
-	            AvaliacaoDAO.exibirAvaliacaoPeriodo(mesInicio,mesFinal);
+	            System.out.println("Insira o MES da consulta: ");
+	            int mes = s.nextInt();
+	            System.out.println(AvaliacaoDAO.exibirAvaliacaoPeriodo(personalLogado, mes));
 	            
 	        } else if (opcao == 4) {
 	        	retorna = false;
@@ -196,5 +201,50 @@ public class MenuPrincipal {
 	        }
 	    }
 		return retorna;
+	}
+	
+	public static int leMenu(String nome, String tipo, String senha) {
+		Scanner  s = new Scanner(System.in);
+		int opcao = 0;
+		boolean validador = true;
+		
+		
+		do {			
+			if(tipo.equalsIgnoreCase("aluno")) {
+				MenuAluno.exibeMenuAluno(nome);
+				 if (s.hasNextInt()) {
+					 opcao = s.nextInt();
+				 } else {
+					 opcao = -1;
+				 }
+				if(opcao < 1 || opcao > 6 ) {
+					System.out.println("Opção inválida!");
+					validador = false;
+				}	
+			 }else if (tipo.equalsIgnoreCase("funcionario")) {
+				MenuFuncionario.exibeMenuFuncionario(nome);
+				if (s.hasNextInt()) {
+					 opcao = s.nextInt();
+				} else {
+					 opcao = -1;
+				}			
+				if(opcao < 1 || opcao > 7 ) {
+					System.out.println("Opção inválida!");
+					validador = false;
+				}			
+			} else if (tipo.equalsIgnoreCase("personal")) {
+				MenuPersonal.exibeMenuPersonal(nome);
+				 if (s.hasNextInt()) {
+					 opcao = s.nextInt();
+				 } else {
+					 opcao = -1;
+				 }
+				if(opcao < 1 || opcao > 3 ) {
+					System.out.println("Opção inválida!");
+					validador = false;
+				}
+			}
+		}while(!validador);
+	return opcao;
 	}
 }

@@ -38,7 +38,7 @@ public class AlunoDAO {
 		
 		try {
 			PreparedStatement ps = ConexaoBD.getConexao().prepareStatement(sqlAluno);
-			ps.setObject(1, aluno.getPlanoContratado());
+			ps.setObject(1, aluno.getPlanoContratado()); // SET OBJECT DANDO PROBLEMA...
 			ps.setObject(2,LocalDateTime.now());
 			ps.executeUpdate();
 			
@@ -109,12 +109,12 @@ public class AlunoDAO {
 				stringFormatada = String.format("""
 						
 						_______________________________________________
-						|Nome: %s
-						|CPF:  %s
-						|DataNascimento: %s
-						|Telefone: %s
-						|Email: %s
-						|plano Contratado: %s
+						|	●Nome: %s
+						|	●CPF:  %s
+						|	●DataNascimento: %s
+						|	●Telefone: %s
+						|	●Email: %s
+						|	●plano Contratado: %s
 						|______________________________________________
 						""", nome,cpf,dataNascimento,telefone,email,planoContratado);	
 			} else {
@@ -145,12 +145,12 @@ public class AlunoDAO {
 				
 				stringFormatada = String.format(
 				"""
-						ID do Aluno: %d
-						Nome : %s
-						Data Nascimento: %s
-						Telefone: %s
-						Email: %s
-			___________________________________________________________		
+				|	●ID do Aluno: %d
+				|	●Nome : %s
+				|	●Data Nascimento: %s
+				|	●Telefone: %s
+				|	●Email: %s
+				|______________________________________________________		
 				""", alunoID, nome, dataNascimento, telefone, email);
 				todosAlunos.append(stringFormatada);
 			} 
@@ -205,12 +205,12 @@ public class AlunoDAO {
 				
 				stringFormatada = String.format(
 				"""
-						ID do Aluno: %d
-						Nome : %s
-						Data Nascimento: %s
-						Telefone: %s
-						Email: %s
-			___________________________________________________________		
+				|	●ID do Aluno: %d
+				|	●Nome : %s
+				|	●Data Nascimento: %s
+				|	●Telefone: %s
+				|	●Email: %s
+				|________________________________________________		
 				""", alunoID, nome, dataNascimento, telefone, email);
 				todasAvaliacoes.append(stringFormatada);
 			} 
